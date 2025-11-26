@@ -1,0 +1,514 @@
+/* ===== CABECERA PRINCIPAL ===== */
+.custom-toolbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 220px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  background-image: url('/assets/Banner.png');
+  background-size: cover;
+  background-position: center -270px;
+  background-repeat: no-repeat;
+  opacity: 0.95;
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(116, 232, 230, 0.9),
+    0 0 70px rgba(182, 242, 255, 0.8);
+  transition: all 0.3s ease-in-out;
+  z-index: 1000;
+  overflow: hidden; /* Evita que el header genere scroll vertical */
+}
+
+/* Estado encogido al hacer scroll */
+.custom-toolbar.shrink {
+  height: 80px;
+  background-position: center -70px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.custom-toolbar.shrink .imagen-logo img {
+  width: 90px;
+  margin-bottom: 10px;
+}
+
+/* ===== LOGO ===== */
+.imagen-logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.imagen-logo img {
+  width: 150px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  transition: width 0.3s ease, transform 0.3s ease;
+}
+
+.imagen-logo img:hover {
+  transform: scale(1.05);
+}
+
+/* ===== NAVEGACIÓN ===== */
+.botones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.botones-rec {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  padding: 12px 25px;
+  border-radius: 50px;
+  background-color: rgba(15, 8, 252, 0.85);
+  backdrop-filter: blur(6px);
+  transition: background-color 0.3s ease;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* ===== BOTONES ===== */
+.nav-btn {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  padding: 6px 10px;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-btn:hover {
+  border-bottom: 2px solid #76e8e6;
+  color: #76e8e6;
+}
+
+/* Botones especiales (Iniciar/Cerrar sesión) */
+.btn-accent {
+  padding: 8px 18px;
+  background: linear-gradient(90deg, #007bff, #00c8ff);
+  border-radius: 30px;
+  color: #fff;
+  font-weight: 700;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-accent:hover {
+  background: linear-gradient(90deg, #005eff, #00aaff);
+  transform: scale(1.05);
+}
+
+/* ===== MENÚ DESPLEGABLE (opcional) ===== */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  background-color: #0f08fc;
+  min-width: 180px;
+  box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  padding: 8px 0;
+  z-index: 10;
+}
+
+.dropdown-menu button {
+  background: none;
+  border: none;
+  color: white;
+  text-align: left;
+  width: 100%;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+}
+
+.dropdown-menu button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ===== RESPONSIVIDAD ===== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .custom-toolbar {
+    flex-direction: column;
+    height: auto;
+    padding: 20px 15px;
+    background-position: center;
+  }
+
+  .botones-rec {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .imagen-logo img {
+    width: 120px;
+  }
+
+  .nav-btn {
+    font-size: 15px;
+  }
+}
+
+/* Móviles */
+@media (max-width: 600px) {
+  .custom-toolbar {
+    padding: 9px;
+    background-position: center;
+  }
+
+  .imagen-logo img {
+    width: 80px;
+  }
+
+  .botones-rec {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .nav-btn {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .btn-accent {
+    width: 100%;
+  }
+}
+
+/* ===== GLOBAL RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* 🔒 Evita scroll horizontal */
+  scroll-behavior: smooth; /* desplazamiento suave */
+  font-family: 'Roboto', sans-serif;
+}
+
+/* ===== CABECERA PRINCIPAL ===== */
+.custom-toolbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 220px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  background-image: url('/assets/Banner.png');
+  background-size: cover;
+  background-position: center -270px;
+  background-repeat: no-repeat;
+  opacity: 0.95;
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(116, 232, 230, 0.9),
+    0 0 70px rgba(182, 242, 255, 0.8);
+  transition: all 0.3s ease-in-out;
+  z-index: 1000;
+  overflow-x: hidden; /* 🔒 Evita desbordes en el header */
+  overflow: hidden; /* Evita que el header genere scroll vertical */
+}
+
+/* Estado encogido al hacer scroll */
+.custom-toolbar.shrink {
+  height: 80px;
+  background-position: center -70px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.custom-toolbar.shrink .imagen-logo img {
+  width: 90px;
+  margin-bottom: 10px;
+}
+
+/* ===== LOGO ===== */
+.imagen-logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  overflow: hidden; /* Evita que el logo empuje el ancho */
+}
+
+.imagen-logo img {
+  width: 150px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  transition: width 0.3s ease, transform 0.3s ease;
+}
+
+.imagen-logo img:hover {
+  transform: scale(1.05);
+}
+
+/* ===== NAVEGACIÓN ===== */
+.botones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Evita desbordamiento */
+}
+
+.botones-rec {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  padding: 12px 25px;
+  border-radius: 50px;
+  background-color: rgba(15, 8, 252, 0.85);
+  backdrop-filter: blur(6px);
+  transition: background-color 0.3s ease;
+  font-family: 'Roboto', sans-serif;
+  max-width: 100%; /* 🔒 Evita que exceda el ancho */
+  flex-wrap: wrap; /* Evita desbordes si hay muchos botones */
+}
+
+/* ===== BOTONES ===== */
+.nav-btn {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  padding: 6px 10px;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap; /* Evita cortes de texto */
+}
+
+.nav-btn:hover {
+  border-bottom: 2px solid #76e8e6;
+  color: #76e8e6;
+}
+
+/* Botones especiales (Iniciar/Cerrar sesión) */
+.btn-accent {
+  padding: 8px 18px;
+  background: linear-gradient(90deg, #007bff, #00c8ff);
+  border-radius: 30px;
+  color: #fff;
+  font-weight: 700;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-accent:hover {
+  background: linear-gradient(90deg, #005eff, #00aaff);
+  transform: scale(1.05);
+}
+
+/* ===== MENÚ DESPLEGABLE (opcional) ===== */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #0f08fc;
+  min-width: 180px;
+  box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  padding: 8px 0;
+  z-index: 10;
+}
+
+.dropdown-menu button {
+  background: none;
+  border: none;
+  color: white;
+  text-align: left;
+  width: 100%;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+}
+
+.dropdown-menu button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ===== RESPONSIVIDAD ===== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .custom-toolbar {
+    flex-direction: column;
+    height: auto;
+    padding: 20px 15px;
+    background-position: center -150px;
+    overflow-x: hidden;
+  }
+
+  .botones-rec {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .imagen-logo img {
+    width: 120px;
+  }
+
+  .nav-btn {
+    font-size: 15px;
+  }
+}
+
+/* Móviles */
+@media (max-width: 600px) {
+  .custom-toolbar {
+    padding: 10px;
+    background-position: center -50px;
+    overflow-x: hidden;
+  }
+
+  .imagen-logo img {
+    width: 80px;
+  }
+
+  .botones-rec {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .nav-btn {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .btn-accent {
+    width: 100%;
+  }
+}
+
+/* ===== HAMBURGER MENU ===== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1100; /* encima del menú */
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Animación a X al abrir */
+.hamburger span.open:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+.hamburger span.open:nth-child(2) {
+  opacity: 0;
+}
+.hamburger span.open:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+/* ===== MÓVILES ===== */
+@media (max-width: 600px) {
+  /* Contenedor del logo y hamburguesa */
+  .logo-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* Ocultar menú por defecto */
+  .botones {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0; /* pegado al banner, no separa */
+    padding: 0;
+    background-color: transparent; /* sin franja extra */
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+  }
+
+  /* Mostrar menú al abrir */
+  .botones.mobile-open {
+    display: flex;
+    max-height: 1000px; /* suficiente para todos los botones */
+    opacity: 1;
+  }
+
+  /* Contenedor de botones */
+  .botones-rec {
+    flex-direction: column;
+    width: 95%;
+    gap: 12px;
+    padding: 12px 15px;
+    border-radius: 12px;
+    background-color: rgba(15, 8, 252, 0.9);
+    backdrop-filter: blur(6px);
+  }
+
+  .nav-btn {
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    padding: 10px 0;
+  }
+
+  .btn-accent {
+    width: 100%;
+    padding: 10px 0;
+    font-weight: 600;
+  }
+}
+

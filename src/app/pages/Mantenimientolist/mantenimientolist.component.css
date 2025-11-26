@@ -1,0 +1,338 @@
+/* =============================
+   GOOGLE FONTS
+============================= */
+/* =============================
+   GLOBAL STYLES
+============================= */
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.6;
+  background-color: #f5f6fa;
+  margin: 0;
+  padding: 0;
+}
+
+/* =============================
+   HEADINGS
+============================= */
+h1, h2, h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 15px 0;
+}
+
+h1 {
+  font-size: 2.2em;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 1.8em;
+}
+
+h3 {
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+/* =============================
+   PARAGRAPHS
+============================= */
+p {
+  font-size: 1em;
+  line-height: 1.7;
+  color: #555;
+}
+
+/* =============================
+   BUTTONS
+============================= */
+button {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* =============================
+   INPUTS
+============================= */
+input[type="text"], input[type="url"], textarea {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 1em;
+}
+
+/* =============================
+   MAIN LAYOUT
+============================= */
+.main-layout {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 30px;
+  padding: 20px;
+  margin-bottom: 40px;
+}
+
+/* ===== Columna izquierda (contenido público) ===== */
+.content-column {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-width: 1200px;
+}
+
+/* ===== Columna derecha (panel admin fijo) ===== */
+.admin-column {
+  flex: 0 0 500px;
+  max-width: 600px;
+  min-width: 300px;
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+}
+
+/* =============================
+   SECCIONES PRINCIPALES
+============================= */
+.maintenance-info,
+.videos-section {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* ===== Maintenance Info ===== */
+.maintenance-info h2 {
+  margin-bottom: 15px;
+  color: #1a3a57;
+}
+
+.maintenance-info p {
+  margin: 0;
+  font-size: 1.05em;
+  color: #444;
+}
+
+/* =============================
+   ADMIN VIDEO UPDATE (Panel)
+============================= */
+.admin-video-update {
+  background: linear-gradient(145deg, #f0f4f8, #e6edf5);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #d0d9e6;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px 25px;
+  transition: all 0.5s ease;
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+/* ===== Botón superior (Editar Videos) ===== */
+.admin-video-update button:first-child {
+  margin-bottom: 15px;
+  background: linear-gradient(90deg, #3498db, #5dade2);
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+  transition: all 0.3s ease;
+}
+
+.admin-video-update button:first-child:hover {
+  background: linear-gradient(90deg, #2471a3, #2e86c1);
+  box-shadow: 0 6px 12px rgba(36, 113, 163, 0.4);
+}
+
+/* ===== Contenedor interno (inputs y lista) ===== */
+.admin-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+  padding: 0;
+}
+
+/* Expandir inputs cuando se activa */
+.admin-video-update.show-inputs .admin-inputs {
+  max-height: 1000px;
+  padding: 15px 0;
+}
+
+/* ===== Input Groups ===== */
+.admin-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-input-group label {
+  font-weight: 500;
+  color: #34495e;
+  font-size: 0.95em;
+}
+
+.admin-input-group input {
+  padding: 12px 14px;
+  border: 1px solid #bdc3c7;
+  border-radius: 8px;
+  font-size: 1em;
+  transition: all 0.3s ease;
+}
+
+.admin-input-group input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52,152,219,0.15);
+  outline: none;
+  background-color: #fff;
+}
+
+/* ===== Lista de videos con scroll ===== */
+.admin-video-list {
+  margin-top: 15px;
+  flex: 1;
+  overflow-y: auto;
+  max-height: 60vh;
+  padding-right: 8px;
+}
+
+.admin-video-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.admin-video-list::-webkit-scrollbar-thumb {
+  background: #b5b5b5;
+  border-radius: 4px;
+}
+
+.admin-video-list::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+.admin-video-list .video-item {
+  margin-bottom: 20px;
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.admin-video-list iframe {
+  width: 100%;
+  border-radius: 6px;
+}
+
+/* =============================
+   SECCIÓN DE VIDEOS (PÚBLICA)
+============================= */
+.videos-section {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.videos-section h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #2c3e50;
+}
+
+/* ===== Grid de videos ===== */
+.public-video-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 20px;
+  direction: rtl;
+}
+
+/* Cada video */
+.video-item {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  flex: 1 1 calc(50% - 20px);
+  box-sizing: border-box;
+  direction: ltr;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+
+.video-item h4 {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+/* Marco del video */
+.video-frame {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* relación 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.video-frame iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* =============================
+   RESPONSIVE DESIGN
+============================= */
+@media (max-width: 1024px) {
+  .main-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .admin-column {
+    position: relative;
+    top: auto;
+    width: 100%;
+    max-width: 600px;
+    order: -1; /* mueve el panel arriba en móviles */
+  }
+
+  .content-column {
+    width: 100%;
+  }
+
+  .video-item {
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .video-item {
+    flex: 1 1 100%;
+  }
+}

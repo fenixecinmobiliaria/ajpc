@@ -1,0 +1,45 @@
+<div class="catalog-container">
+  <!-- === Barra lateral de búsqueda === -->
+  <aside class="search-sidebar">
+    <h2>Buscar Productos</h2>
+
+    <div class="search-filters">
+      <input
+        type="text"
+        id="searchTerm"
+        placeholder="🔍 Buscar producto..."
+        [(ngModel)]="searchTerm"
+      />
+
+      <div class="category-buttons">
+        <button class="filter-button active" (click)="filtrarPorCategoria('')">Todos</button>
+        <button class="filter-button" (click)="filtrarPorCategoria('Ambulancia')">Ambulancias</button>
+        <button class="filter-button" (click)="filtrarPorCategoria('Equipo Medico')">Equipo Médico</button>
+        <button class="filter-button" (click)="filtrarPorCategoria('Utileria Medica')">Utilería Médica</button>
+      </div>
+    </div>
+
+    <button class="search-button" (click)="search()">Buscar</button>
+  </aside>
+
+  <!-- === Sección principal del catálogo === -->
+  <main class="catalog-content">
+    <div class="catalog-header">
+      <h2>Catálogo de Productos</h2>
+      <p *ngIf="filteredProducts.length > 0">{{ filteredProducts.length }} resultados encontrados</p>
+      <p *ngIf="filteredProducts.length === 0" class="no-results">No se encontraron productos.</p>
+    </div>
+
+    <div class="catalog-items">
+      <div *ngFor="let product of filteredProducts" class="catalog-item">
+        <div class="media-container">
+          <img [src]="product.foto" [alt]="product.nombre" />
+        </div>
+        <div class="info">
+          <h3>{{ product.nombre }}</h3>
+          <p>{{ product.descripcion }}</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

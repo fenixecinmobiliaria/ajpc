@@ -1,0 +1,57 @@
+<section class="todo">
+  <section class="section-container">
+    <!-- División izquierda -->
+    <div class="left-side">
+      <div class="arriba">
+        <h1>JPC Electronics</h1>
+        <p>Todo lo que necesite en equipos médicos.</p>
+      </div>
+      <div class="imagen">
+        <button class="btnconimagen" routerLink="/mantenimientolist">
+          <img src="assets/imagenes/mantenimiento.jpg" alt="icono" class="icono">
+          <span class="texto">Mantenimiento</span>
+        </button>
+        <button class="btnconimagen" routerLink="/repotenciacionlist">
+          <img src="assets/imagenes/repotenciacion.jpg" alt="icono" class="icono">
+          <span class="texto">Repotenciación</span>
+        </button>
+        <button class="btnconimagen" routerLink="/fabricacionlist">
+          <img src="assets/imagenes/fabricacion.jpg" alt="icono" class="icono">
+          <span class="texto">Fabricación</span>
+        </button>
+        <button class="btnconimagen" routerLink="/catalogo">
+          <img src="assets/imagenes/leequipe.jpg" alt="icono" class="icono">
+          <span class="texto">Productos</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="hero-container" (click)="navigateToCatalogo()">
+      <div class="men-container">
+        <img [src]="imagenActual" alt="Imagen ambulancia" class="imagen-rotativa">
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section class="videos">
+    <video #videoPlayer class="video" autoplay loop playsinline muted>
+      <source src="assets/ambulancia video.mp4" type="video/mp4">
+    </video>
+  </section>
+
+  <!-- Product Listing Section -->
+  <section class="product-listing">
+    <h2>Nuestros Productos</h2>
+    <div class="products-grid">
+      <div *ngFor="let product of filteredProducts" class="product-card">
+        <img [src]="product.foto" alt="{{ product.nombre }}" class="product-image">
+        <h3>{{ product.nombre }}</h3>
+        <p class="product-description">{{ product.descripcion }}</p>
+        <p class="product-category">Categoría: {{ product.categoria }}</p>
+      </div>
+    </div>
+  </section>
+
+  <router-outlet></router-outlet>
+</section>
