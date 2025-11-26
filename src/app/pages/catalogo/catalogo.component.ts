@@ -15,6 +15,7 @@ export class CatalogoComponent implements OnInit {
   filteredProducts: Producto[] = [];
   searchTerm: string = '';
   selectedCategory: string | null = null; // Property to store the selected category
+  selectedProduct: Producto | null = null; // Property to store the selected product
 
   constructor(
     private productoService: ProductoService // Inject ProductoService
@@ -84,5 +85,15 @@ export class CatalogoComponent implements OnInit {
   clearCategoryFilter(): void {
     this.selectedCategory = null;
     this.applyFilters();
+  }
+
+  // Method to select a product and show the modal
+  selectProduct(product: Producto): void {
+    this.selectedProduct = product;
+  }
+
+  // Method to close the modal
+  closeModal(): void {
+    this.selectedProduct = null;
   }
 }

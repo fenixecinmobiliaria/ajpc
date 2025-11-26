@@ -7,7 +7,7 @@
       <input
         type="text"
         id="searchTerm"
-        placeholder="🔍 Buscar producto..."
+        placeholder=" Buscar producto..."
         [(ngModel)]="searchTerm"
       />
 
@@ -31,7 +31,7 @@
     </div>
 
     <div class="catalog-items">
-      <div *ngFor="let product of filteredProducts" class="catalog-item">
+      <div *ngFor="let product of filteredProducts" class="catalog-item" (click)="selectProduct(product)">
         <div class="media-container">
           <img [src]="product.foto" [alt]="product.nombre" />
         </div>
@@ -42,4 +42,22 @@
       </div>
     </div>
   </main>
+</div>
+
+<!-- Modal -->
+<div *ngIf="selectedProduct" class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close-button" (click)="closeModal()">&times;</span>
+    <div class="modal-body">
+      <div class="modal-image">
+        <img [src]="selectedProduct.foto" alt="{{ selectedProduct.nombre }}">
+      </div>
+      <div class="modal-details">
+        <h2>{{ selectedProduct.nombre }}</h2>
+        <p><strong>Categoría:</strong> {{ selectedProduct.categoria }}</p>
+        <p><strong>Descripción:</strong> {{ selectedProduct.descripcion }}</p>
+        <!-- Agrega más detalles del producto si es necesario -->
+      </div>
+    </div>
+  </div>
 </div>
