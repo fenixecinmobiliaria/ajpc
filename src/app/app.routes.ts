@@ -9,6 +9,7 @@ import { MantenimientolistComponent } from './pages/Mantenimientolist/mantenimie
 import { RepotenciacionComponent } from './pages/Repotenciacionlist/repotenciacion.component';
 import { FabricacionComponent } from './pages/fabricacionlist/fabricacion.component';
 import { DomoticaComponent } from './pages/domotica/domotica.component';
+import { DisenolistComponent } from './pages/disenolist/disenolist.component';
 
 
 export const routes: Routes = [
@@ -68,6 +69,10 @@ export const routes: Routes = [
     {
       path: 'domotica',
       component: DomoticaComponent,
+    },
+    {
+      path: 'disenolist',
+      component: DisenolistComponent,
     },
 
   ];
