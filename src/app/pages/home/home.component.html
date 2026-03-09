@@ -169,18 +169,14 @@
     <div class="min-h-[500px] bg-[#f0f9ff]"></div>
   }
 
-  @defer (on viewport) {
-    <section class="w-full bg-[#050912] py-16">
-      <div class="container mx-auto px-6">
-        <div class="rounded-[3rem] overflow-hidden border border-white/5 shadow-2xl relative group">
-          <video #videoPlayer class="w-full aspect-video object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-1000" autoplay loop playsinline muted preload="none" title="Video de presentación de Ingeniería Clínica de JPC Electronics">
-            <source src="assets/ambulancia video.mp4" type="video/mp4">
-          </video>
-        </div>
+  <section class="w-full bg-[#050912] py-16">
+    <div class="container mx-auto px-6">
+      <div class="rounded-[3rem] overflow-hidden border border-white/5 shadow-2xl relative group">
+        <video #videoPlayer class="w-full aspect-video object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-1000" autoplay loop playsinline muted preload="auto" title="Video de presentación de Ingeniería Clínica de JPC Electronics">
+          <source src="assets/ambulancia video.mp4" type="video/mp4">
+        </video>
       </div>
-    </section>
-  } @placeholder {
-    <div class="min-h-[400px] bg-[#050912]"></div>
-  }
+    </div>
+  </section>
 
 </div>
