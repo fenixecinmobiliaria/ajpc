@@ -1,12 +1,15 @@
 {
   "name": "jpcelectronics",
   "version": "0.0.0",
+  "homepage": "https://diegotorres006.github.io/ajpcV2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "predeploy": "ng build --base-href /ajpcV2/",
+    "deploy": "gh-pages -d dist/jpcelectronics/browser"
   },
   "private": true,
   "dependencies": {
