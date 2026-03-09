@@ -8,7 +8,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "predeploy": "ng build --base-href /ajpc/",
+    "predeploy": "ng build --base-href /",
     "deploy": "gh-pages -d dist/jpcelectronics/browser"
   },
   "private": true,
