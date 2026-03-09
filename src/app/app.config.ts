@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withHashLocation } from '@angular/router';
 
 import { routes } from './app.routes';
 import { initializeApp, provideFirebaseApp, getApp } from '@angular/fire/app';
@@ -10,24 +10,20 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(routes, withHashLocation()),
     provideFirebaseApp(() => initializeApp({
-
-     apiKey: "AIzaSyAPlsPY3277qlr7mq4hn0W_Gd6ijxM5NfU",
-authDomain: "jpcelectronics-52996.firebaseapp.com",
-projectId: "jpcelectronics-52996",
-storageBucket: "jpcelectronics-52996.firebasestorage.app",
-messagingSenderId: "96793344867",
-appId: "1:96793344867:web:6a86aaf814bcf69ff23156",
-measurementId: "G-4RJQFLPSHG"
-
+      apiKey: "AIzaSyAPlsPY3277qlr7mq4hn0W_Gd6ijxM5NfU",
+      authDomain: "jpcelectronics-52996.firebaseapp.com",
+      projectId: "jpcelectronics-52996",
+      storageBucket: "jpcelectronics-52996.firebasestorage.app",
+      messagingSenderId: "96793344867",
+      appId: "1:96793344867:web:6a86aaf814bcf69ff23156",
+      measurementId: "G-4RJQFLPSHG"
     })),
     provideAuth(() => getAuth()),
-   provideFirestore(() => initializeFirestore(getApp(), {
-  localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
-})),
-
+    provideFirestore(() => initializeFirestore(getApp(), {
+      localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
+    })),
     provideStorage(() => getStorage())
   ]
 };
-
