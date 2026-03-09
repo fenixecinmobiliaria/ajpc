@@ -41,7 +41,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       const video = this.videoPlayer.nativeElement;
       video.muted = true;
       video.volume = 0;
-      // Prevenimos que el video intente cargar agresivamente
       video.play().catch(() => {});
     }
   }

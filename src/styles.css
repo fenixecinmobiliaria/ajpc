@@ -4,9 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Tu configuración de fuente Inter que ya tenías */
-
-
 * {
   font-family: 'Inter', sans-serif !important;
+}
+html {
+  zoom: 0.85;
 }

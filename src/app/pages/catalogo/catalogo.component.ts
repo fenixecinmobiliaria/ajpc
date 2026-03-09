@@ -75,7 +75,6 @@ export class CatalogoComponent implements OnInit {
     this.selectedProduct = null;
   }
 
-  // AQUÍ ESTÁ EL CAMBIO: Ahora busca producto.fotos
   obtenerImagenUrl(producto: any, index: number): string {
     if (producto.fotos && producto.fotos.length > 0) {
       return producto.fotos[this.indicesImagenes[index] || 0];

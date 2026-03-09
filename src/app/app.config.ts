@@ -5,11 +5,11 @@ import { routes } from './app.routes';
 import { initializeApp, provideFirebaseApp, getApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore, connectFirestoreEmulator, initializeFirestore, persistentLocalCache, persistentMultipleTabManager } from '@angular/fire/firestore';
-import { getStorage, provideStorage } from '@angular/fire/storage'; // Importar Firebase Storage
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }), 
+    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideFirebaseApp(() => initializeApp({
 
@@ -22,7 +22,7 @@ appId: "1:96793344867:web:6a86aaf814bcf69ff23156",
 measurementId: "G-4RJQFLPSHG"
 
     })),
-    provideAuth(() => getAuth()), 
+    provideAuth(() => getAuth()),
    provideFirestore(() => initializeFirestore(getApp(), {
   localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
 })),

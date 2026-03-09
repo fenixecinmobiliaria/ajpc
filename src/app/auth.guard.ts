@@ -16,18 +16,17 @@ export class AuthGuard implements CanActivate {
     return new Observable<boolean>((observer) => {
       this.authService.authState$.subscribe((user) => {
         if (user) {
-          // Verificar si el usuario tiene el rol de admin
           this.authService.checkUserRole(user.uid).then((isAdmin) => {
             if (isAdmin) {
               observer.next(true);
             } else {
-              observer.next(false); // Usuario no autorizado
-              this.router.navigate(['/home']); // Redirigir si no es admin
+              observer.next(false);
+              this.router.navigate(['/home']);
             }
           });
         } else {
           observer.next(false);
-          this.router.navigate(['/home']); // Redirigir si no está logueado
+          this.router.navigate(['/home']);
         }
       });
     });

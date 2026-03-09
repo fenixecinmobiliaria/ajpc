@@ -10,11 +10,11 @@ import { Producto } from '../../models/producto';
 
 
 @Injectable({ providedIn: 'root' })
-export class ProductoService { // Renamed from PropertyService to ProductoService
+export class ProductoService {
   private firestore = inject(Firestore);
   private storage = inject(Storage);
   private auth = inject(Auth);
-  private ngZone = inject(NgZone);  // 👈 inyectamos NgZone
+  private ngZone = inject(NgZone);
 
 
   getProducto(): Observable<Producto[]> {
@@ -38,17 +38,16 @@ export class ProductoService { // Renamed from PropertyService to ProductoServic
 
 
   getProductoRefPorId(id: string) {
-    const docRef = doc(this.firestore, 'Productos', id); // Changed 'Producto' to 'Productos'
+    const docRef = doc(this.firestore, 'Productos', id);
     return docData(docRef) as Observable<Producto>;
   }
 
   actualizarProducto(id: string, data: any) {
-    const docRef = doc(this.firestore, 'Productos', id); // Changed 'Producto' to 'Productos'
+    const docRef = doc(this.firestore, 'Productos', id);
     return updateDoc(docRef, data);
   }
 
   eliminarProducto(id: string) {
-    // Delete the storage image (if any) then delete the Firestore document
     const docRef = doc(this.firestore, 'Productos', id);
     return (async () => {
       try {
@@ -59,7 +58,6 @@ export class ProductoService { // Renamed from PropertyService to ProductoServic
             await this.deleteFile(fotoPath);
           } catch (err) {
             console.warn('eliminarProducto: could not delete storage file', fotoPath, err);
-            // continue to delete document even if storage deletion failed
           }
         }
       } catch (err) {
@@ -72,7 +70,7 @@ export class ProductoService { // Renamed from PropertyService to ProductoServic
 
 
   actualizarImagenesProducto(id: string, nuevasImagenes: string[]) {
-    const docRef = doc(this.firestore, 'Productos', id); // Changed 'Producto' to 'Productos'
+    const docRef = doc(this.firestore, 'Productos', id);
     return updateDoc(docRef, {
       imagenes: nuevasImagenes
     });
@@ -80,26 +78,23 @@ export class ProductoService { // Renamed from PropertyService to ProductoServic
 
   verificarCodigoExiste(codigo: string): Promise<boolean> {
     const codigoNormalizado = codigo.trim().toLowerCase();
-    const propiedadesRef = collection(this.firestore, 'Productos'); // Changed 'Producto' to 'Productos'
+    const propiedadesRef = collection(this.firestore, 'Productos');
     const consulta = query(propiedadesRef, where('IPD', '==', codigoNormalizado));
     return getDocs(consulta).then(snapshot => !snapshot.empty);
   }
 
   crearProducto(producto: Producto): Promise<void> {
-    const propiedadesRef = collection(this.firestore, 'Productos'); // Changed 'Producto' to 'Productos'
+    const propiedadesRef = collection(this.firestore, 'Productos');
 
     return addDoc(propiedadesRef, {
       ...producto,
-      // Removed ImagenFolder as it's not directly related to the 'foto' URL and producto.id would be undefined here.
     }).then(() => {});
   }
 
-  // Delete a file from Firebase Storage by its full path (e.g., 'productos/12345_file.webp')
   async deleteFile(filePath: string): Promise<void> {
     if (!filePath) return;
     try {
       const fileRef = ref(this.storage, filePath);
-      // Log current auth state to help diagnose permission issues
       try {
         const user = this.auth.currentUser;
         console.log('deleteFile: currentUser uid=', user?.uid);
@@ -118,7 +113,6 @@ export class ProductoService { // Renamed from PropertyService to ProductoServic
       await deleteObject(fileRef);
     } catch (error) {
       console.warn('deleteFile: could not delete storage object', filePath, error);
-      // Re-throw if you want calling code to handle errors:
       throw error;
     }
   }

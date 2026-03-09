@@ -2,20 +2,20 @@
 
   <section class="hero min-h-[45vh] bg-gradient-to-br from-emerald-900 via-teal-800 to-slate-900 text-white relative overflow-hidden">
     <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.webp')]"></div>
-    <div class="hero-content text-center relative z-10">
-      <div class="max-w-4xl animate-fade-in">
-        <h1 class="text-6xl font-black tracking-tighter uppercase mb-4 leading-none">Repotenciación Técnica</h1>
+    <div class="hero-content text-center relative z-10 w-full px-4">
+      <div class="max-w-4xl animate-fade-in pb-16 md:pb-6 w-full">
+        <h1 class="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-4 leading-none break-words">Repotenciación Técnica</h1>
         <div class="flex justify-center gap-2 mb-6">
           <div class="badge badge-accent font-bold px-4 py-3 shadow-lg uppercase tracking-widest text-xs">LIFE CYCLE OPTIMIZATION</div>
         </div>
-        <p class="text-xl opacity-90 font-medium leading-relaxed max-w-2xl mx-auto">
+        <p class="text-lg md:text-xl opacity-90 font-medium leading-relaxed max-w-2xl mx-auto px-2 md:px-0">
           Recuperamos y actualizamos dispositivos médicos para alcanzar estándares de alto rendimiento, prolongando su vida útil y optimizando la inversión institucional.
         </p>
       </div>
     </div>
   </section>
 
-  <div class="max-w-7xl mx-auto px-4 -mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+  <div class="max-w-7xl mx-auto px-4 -mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 relative z-20">
     <div class="card bg-white shadow-2xl border-b-8 border-emerald-500 hover:-translate-y-2 transition-transform duration-300">
       <div class="card-body">
         <div class="flex items-center gap-4">
@@ -90,10 +90,10 @@
         <figure class="aspect-video bg-slate-950 relative overflow-hidden">
           <iframe [src]="video.sanitizedUrl" class="w-full h-full opacity-80 group-hover:opacity-100 transition-opacity duration-700" allowfullscreen></iframe>
         </figure>
-        <div class="card-body p-10">
-          <div class="flex items-center justify-between">
-            <h3 class="card-title text-slate-900 font-black text-2xl uppercase tracking-tighter">{{ video.title }}</h3>
-            <div class="badge badge-outline text-[10px] font-black opacity-40 uppercase tracking-widest">Upgrade Series</div>
+        <div class="card-body p-8 md:p-10">
+          <div class="flex flex-col items-start gap-3">
+            <div class="badge badge-outline text-[10px] font-black opacity-40 uppercase tracking-widest px-3 py-2">Upgrade Series</div>
+            <h3 class="card-title text-slate-900 font-black text-2xl md:text-3xl uppercase tracking-tighter leading-tight break-words w-full">{{ video.title }}</h3>
           </div>
           <div *ngIf="isAdmin" class="card-actions justify-end mt-8 pt-8 border-t border-slate-50 gap-4">
             <button class="btn btn-sm btn-ghost text-teal-600 font-black hover:bg-teal-50" (click)="startEdit(video)">✎ MODIFICAR</button>

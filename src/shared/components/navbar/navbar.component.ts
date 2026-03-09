@@ -17,7 +17,6 @@ export class NavbarComponent {
 
   closeMenu() {
     this.isDropdownOpen = false;
-    // Forzamos al navegador a quitar el foco para asegurar que DaisyUI responda
     const activeElement = document.activeElement as HTMLElement;
     if (activeElement) {
       activeElement.blur();
