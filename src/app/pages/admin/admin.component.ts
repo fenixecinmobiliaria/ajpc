@@ -3,7 +3,6 @@ import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Producto } from '../../../models/producto';
 import { ProductoService } from '../../services/producto.service';
 import { AuthService } from '../../services/auth.service';
 import { UploadService } from '../../services/upload.service';
@@ -53,16 +52,33 @@ export class AdminComponent implements OnInit {
   isUploading = false;
 
   videos: VideoDisplay[] = [];
+  // Estados de edición de video
+  isVideoEditing = false;
+  editingVideoId: string | null = null;
+  editingVideoCategoryId: string = '';
+
+  // Modelo para el formulario de video
   newVideoTitle: string = '';
   newVideoUrl: string = '';
   newVideoCategory: string = 'maintenanceVideos';
 
-  private seccionesClasificacion = [
+  // Orden de prioridad solicitado para los videos
+  private ordenPrioridadVideos = [
+    'potenciacionVideos',
+    'designVideos',
+    'fabricacionVideos',
+    'alianzasVideos',
+    'domoticaVideos',
+    'maintenanceVideos'
+  ];
+
+  public seccionesClasificacion = [
     { id: 'maintenanceVideos', name: 'Mantenimiento' },
     { id: 'potenciacionVideos', name: 'Repotenciación' },
     { id: 'designVideos', name: 'Diseño 3D' },
     { id: 'fabricacionVideos', name: 'Fabricación' },
-    { id: 'domoticaVideos', name: 'Domótica' }
+    { id: 'domoticaVideos', name: 'Domótica' },
+    { id: 'alianzasVideos', name: 'Alianzas Estratégicas' }
   ];
 
   ngOnInit(): void {
@@ -206,6 +222,7 @@ export class AdminComponent implements OnInit {
   }
 
   editProduct(producto: any): void {
+    this.cancelEditVideo(); // Cancelar edición de video si está activa
     this.isEditing = true;
     this.selectedProductId = producto.id || null;
     this.productoSeleccionado = { ...producto };
@@ -221,6 +238,8 @@ export class AdminComponent implements OnInit {
     for (let i = 0; i < fotosArray.length; i++) {
       this.imagenes.push({ url: fotosArray[i], path: pathsArray[i] });
     }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   deleteProduct(id: string): void {
@@ -281,30 +300,63 @@ export class AdminComponent implements OnInit {
   async loadVideos(): Promise<void> {
     this.videos = [];
     try {
-      for (const sec of this.seccionesClasificacion) {
-        const firebaseVideos = await this.authService.getVideos(sec.id as any);
-        const mapped = firebaseVideos.map(video => ({
+      // Cargar todos los videos primero
+      const allFirebaseVideosPromises = this.seccionesClasificacion.map(sec =>
+        this.authService.getVideos(sec.id as any).then(firebaseVideos => ({
+          secId: sec.id,
+          secName: sec.name,
+          firebaseVideos
+        }))
+      );
+
+      const results = await Promise.all(allFirebaseVideosPromises);
+
+      // Mapear y combinar
+      let tempVideos: VideoDisplay[] = [];
+      results.forEach(result => {
+        const mapped = result.firebaseVideos.map(video => ({
           id: video.id,
           title: video.title,
           description: (video as any).description || '',
           rawUrl: video.url,
           sanitizedUrl: this.domSanitizer.bypassSecurityTrustResourceUrl(this.convertToEmbedUrl(video.url)),
-          categoryId: sec.id,
-          categoryName: sec.name
+          categoryId: result.secId,
+          categoryName: result.secName
         }));
-        this.videos = [...this.videos, ...mapped];
-      }
+        tempVideos = [...tempVideos, ...mapped];
+      });
+
+      // Ordenar por prioridad de categoría
+      tempVideos.sort((a, b) => {
+        const indexA = this.ordenPrioridadVideos.indexOf(a.categoryId);
+        const indexB = this.ordenPrioridadVideos.indexOf(b.categoryId);
+        // Si no se encuentra (-1), lo mandamos al final
+        const priorityA = indexA === -1 ? 999 : indexA;
+        const priorityB = indexB === -1 ? 999 : indexB;
+        return priorityA - priorityB;
+      });
+
+      this.videos = tempVideos;
+
     } catch (error) {
       console.error(error);
     }
   }
 
-  async addVideo(): Promise<void> {
+  async onSubmitVideo(): Promise<void> {
     if (!this.newVideoTitle || !this.newVideoUrl || !this.newVideoCategory) {
-        alert('Título y URL son obligatorios para registrar la evidencia.');
+        alert('Título, URL y categoría son obligatorios.');
         return;
     }
 
+    if (this.isVideoEditing && this.editingVideoId && this.editingVideoCategoryId) {
+      await this.saveVideo();
+    } else {
+      await this.addVideo();
+    }
+  }
+
+  async addVideo(): Promise<void> {
     try {
       const embedUrl = this.convertToEmbedUrl(this.newVideoUrl);
 
@@ -315,13 +367,76 @@ export class AdminComponent implements OnInit {
 
       await this.authService.addVideo(this.newVideoCategory as any, videoData);
 
-      this.newVideoTitle = '';
-      this.newVideoUrl = '';
+      this.resetVideoForm();
       await this.loadVideos();
       alert('Evidencia de video registrada correctamente');
     } catch (error) {
       console.error(error);
-      alert('Error al registrar el video. Revisa la consola para más detalles de Firebase.');
+      alert('Error al registrar el video.');
+    }
+  }
+
+  startEditVideo(video: VideoDisplay): void {
+    this.resetForm(); // Cancelar edición de inventario si está activa
+    this.isVideoEditing = true;
+    this.editingVideoId = video.id || null;
+    this.editingVideoCategoryId = video.categoryId;
+
+    // Rellenar el formulario de la izquierda con los datos actuales (COMO EN EL CATALOGO)
+    this.newVideoTitle = video.title;
+    this.newVideoUrl = video.rawUrl;
+    this.newVideoCategory = video.categoryId;
+
+    // Scroll hasta el formulario de video
+    const videoForm = document.getElementById('evidencia_form');
+    if (videoForm) {
+      videoForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.scrollTo({ top: 300, behavior: 'smooth' }); // Fallback
+    }
+  }
+
+  cancelEditVideo(): void {
+    this.resetVideoForm();
+  }
+
+  resetVideoForm(): void {
+    this.isVideoEditing = false;
+    this.editingVideoId = null;
+    this.editingVideoCategoryId = '';
+    this.newVideoTitle = '';
+    this.newVideoUrl = '';
+    this.newVideoCategory = 'maintenanceVideos'; // Valor por defecto
+  }
+
+  async saveVideo(): Promise<void> {
+    if (!this.editingVideoId || !this.editingVideoCategoryId) return;
+
+    try {
+      const embedUrl = this.convertToEmbedUrl(this.newVideoUrl);
+
+      const updateData = {
+        title: this.newVideoTitle,
+        url: embedUrl
+      };
+
+      // Si cambió de categoría, debemos eliminar del viejo y agregar al nuevo collection
+      if (this.newVideoCategory !== this.editingVideoCategoryId) {
+        // Eliminar del viejo collection
+        await this.authService.deleteVideo(this.editingVideoCategoryId as any, this.editingVideoId);
+        // Agregar al nuevo collection
+        await this.authService.addVideo(this.newVideoCategory as any, updateData);
+      } else {
+        // Si es la misma categoría, solo actualizar el documento
+        await this.authService.updateVideo(this.editingVideoCategoryId as any, this.editingVideoId, updateData);
+      }
+
+      this.resetVideoForm();
+      await this.loadVideos();
+      alert('Evidencia de video actualizada correctamente');
+    } catch (error) {
+      console.error(error);
+      alert('Error al actualizar el video.');
     }
   }
 
@@ -329,6 +444,10 @@ export class AdminComponent implements OnInit {
     if (confirm('¿Eliminar registro definitivo del video?')) {
       try {
         await this.authService.deleteVideo(categoryId as any, id);
+        // Si estábamos editando este video, resetear formulario
+        if (this.isVideoEditing && this.editingVideoId === id) {
+          this.resetVideoForm();
+        }
         await this.loadVideos();
       } catch (error) {
         alert('Error al eliminar el video.');
@@ -350,13 +469,6 @@ export class AdminComponent implements OnInit {
         error: (err) => { this.isUploading = false; reject(err); }
       });
     });
-  }
-
-  obtenerImagenUrl(producto: any, index: number): string {
-    if (producto.fotos && producto.fotos.length > 0) {
-      return producto.fotos[this.indicesImagenes[index] || 0];
-    }
-    return producto.foto || 'assets/logo.webp';
   }
 
   siguienteImagen(index: number, event: Event, max: number): void {

@@ -7,6 +7,7 @@ import { MantenimientoComponent } from './pages/mantenimiento/mantenimiento.comp
 import { RepotenciacionComponent } from './pages/repotenciacion/repotenciacion.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { DisenoInventorComponent } from './pages/diseno-inventor/diseno-inventor.component';
+import { AlianzasEstrategicasComponent } from './pages/alianzas-estrategicas/alianzas-estrategicas.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -18,5 +19,6 @@ export const routes: Routes = [
   { path: 'mantenimiento', component: MantenimientoComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'diseno-inventor', component: DisenoInventorComponent },
+  { path: 'alianzas-estrategicas', component: AlianzasEstrategicasComponent },
   { path: '**', redirectTo: 'home' }
 ];

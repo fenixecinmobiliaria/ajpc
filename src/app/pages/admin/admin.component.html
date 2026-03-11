@@ -1,27 +1,31 @@
-<div class="min-h-screen bg-slate-50 font-sans p-4 lg:p-8 selection:bg-primary selection:text-white">
-  <div class="max-w-[1600px] mx-auto">
-    <header class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
+<div class="min-h-screen bg-slate-50 font-sans p-3 md:p-5 lg:p-7 selection:bg-primary selection:text-white">
+  <div class="max-w-[1700px] mx-auto">
+
+    <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-3">
       <div class="text-center md:text-left">
-        <h1 class="text-4xl font-black text-slate-900 tracking-tighter uppercase leading-none">Panel de Control</h1>
-        <p class="text-sm font-bold text-primary mt-2 uppercase tracking-widest italic">JPC Electronics S.A.</p>
+        <h1 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tighter uppercase leading-none">Panel de Control</h1>
+        <p class="text-xs font-bold text-primary mt-1 uppercase tracking-widest italic opacity-80">JPC Electronics S.A.</p>
       </div>
     </header>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-      <aside class="lg:col-span-4 sticky top-24 space-y-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10">
 
-        <div class="card bg-white shadow-2xl rounded-[2rem] overflow-hidden border border-slate-100">
-          <div class="bg-slate-900 p-6 text-white flex justify-between items-center shadow-lg">
-            <h2 class="font-black uppercase tracking-tighter text-lg">Gestión de Inventario</h2>
-            <div class="badge badge-success font-black text-[10px] p-3">{{ isEditing ? 'EDITANDO' : 'AGREGANDO' }}</div>
+      <aside class="lg:col-span-4 xl:col-span-3 lg:sticky lg:top-24 space-y-6 self-start z-10">
+
+        <div class="card bg-white shadow-2xl rounded-[2rem] overflow-hidden border border-slate-100 animate-fade-in-left">
+          <div class="bg-slate-900 p-4 text-white flex justify-between items-center shadow-lg border-b border-white/5">
+            <h2 class="font-black uppercase tracking-tighter text-base">Gestión de Inventario</h2>
+            <div [class]="isEditing ? 'badge badge-success' : 'badge badge-primary'" class="font-black text-[9px] px-3 py-2 border-none">
+              {{ isEditing ? 'EDITANDO' : 'AGREGANDO' }}
+            </div>
           </div>
-          <form (ngSubmit)="onSubmit()" class="card-body p-8 space-y-6">
-            <input type="text" name="nombre" [(ngModel)]="productoSeleccionado.nombre" placeholder="Nombre Comercial" class="input input-bordered input-primary w-full h-14 font-bold" required />
+          <form (ngSubmit)="onSubmit()" class="card-body p-5 md:p-6 space-y-4">
+            <input type="text" name="nombre" [(ngModel)]="productoSeleccionado.nombre" placeholder="Nombre Comercial" class="input input-bordered input-primary input-sm w-full h-11 font-bold text-sm bg-white" required />
 
-            <div class="grid grid-cols-2 gap-4">
-              <div class="flex items-center gap-2">
-                <select name="categoria" [(ngModel)]="productoSeleccionado.categoria" (change)="onCategoriaChange($event)" class="select select-bordered select-primary w-full h-14 text-xs font-bold bg-slate-50">
-                  <option value="" disabled selected>Seleccionar Categoría...</option>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="flex items-center gap-1.5 relative">
+                <select name="categoria" [(ngModel)]="productoSeleccionado.categoria" (change)="onCategoriaChange($event)" class="select select-bordered select-primary select-sm w-full h-11 text-[11px] font-bold bg-slate-50 border-primary/30 truncate">
+                  <option value="" disabled selected>Categoría...</option>
                   <option *ngFor="let cat of categoriasDisponibles" [value]="cat">{{ cat }}</option>
                   <option value="ADD_NEW" class="text-primary font-black">+ Agregar categoría</option>
                 </select>
@@ -29,147 +33,177 @@
                 <button type="button"
                         *ngIf="productoSeleccionado.categoria && productoSeleccionado.categoria !== 'ADD_NEW' && productoSeleccionado.categoria !== ''"
                         (click)="eliminarCategoria(productoSeleccionado.categoria)"
-                        class="btn btn-square btn-outline btn-error h-14 border-2 shadow-sm"
-                        title="Eliminar Categoría">
+                        class="btn btn-square btn-outline btn-error btn-xs h-11 w-11 border border-red-200 shadow-inner flex-shrink-0"
+                        title="Eliminar Categoría Actual">
                   ✕
                 </button>
               </div>
 
-              <input type="text" name="tipo" [(ngModel)]="productoSeleccionado.tipo" placeholder="Tipo Técnico" class="input input-bordered input-primary w-full h-14 text-xs font-bold" />
+              <input type="text" name="tipo" [(ngModel)]="productoSeleccionado.tipo" placeholder="Tipo Técnico" class="input input-bordered input-primary input-sm w-full h-11 text-[11px] font-bold bg-white" />
             </div>
 
-            <textarea name="descripcion" [(ngModel)]="productoSeleccionado.descripcion" placeholder="Especificaciones Técnicas Completas" class="textarea textarea-bordered textarea-primary w-full h-32 font-medium"></textarea>
+            <textarea name="descripcion" [(ngModel)]="productoSeleccionado.descripcion" placeholder="Especificaciones Técnicas Completas" class="textarea textarea-bordered textarea-primary textarea-sm w-full h-24 font-medium text-xs bg-white leading-snug"></textarea>
 
             <div class="form-control">
-              <label class="label font-black text-[11px] uppercase text-slate-400 tracking-[0.2em] mb-1 opacity-70">Galería del Equipo</label>
+              <label class="label font-black text-[10px] uppercase text-slate-400 tracking-[0.2em] mb-0.5 opacity-70">Galería del Equipo (JPEG/PNG/WEBP, máx 5MB)</label>
 
-              <div class="grid grid-cols-3 gap-3">
-                <div *ngFor="let img of imagenes; let i = index" class="relative group rounded-xl overflow-hidden h-24 border-2 border-slate-200 shadow-inner bg-slate-50 flex items-center justify-center">
-                  <img [src]="img.url" class="w-full h-full object-contain p-2 mix-blend-multiply" />
+              <div class="grid grid-cols-3 md:grid-cols-4 gap-2.5 mt-1">
+                <div *ngFor="let img of imagenes; let i = index" class="relative group rounded-xl overflow-hidden aspect-square border-2 border-slate-100 shadow-inner bg-slate-50 flex items-center justify-center p-1">
+                  <img [src]="img.url" class="w-full h-full object-contain mix-blend-multiply" />
 
-                  <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center backdrop-blur-sm">
-                    <button type="button" (click)="removeImage(i)" class="btn btn-circle btn-sm btn-error text-white font-black hover:scale-110 transition-transform shadow-2xl">
+                  <div class="absolute inset-0 bg-slate-950/70 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center backdrop-blur-sm z-10">
+                    <button type="button" (click)="removeImage(i)" class="btn btn-circle btn-xs btn-error text-white font-black hover:scale-110 transition-transform shadow-2xl">
                       ✕
                     </button>
                   </div>
                 </div>
 
-                <label class="rounded-xl border-2 border-dashed border-primary/40 bg-blue-50/50 flex flex-col items-center justify-center h-24 cursor-pointer hover:bg-blue-50 hover:border-primary transition-all group">
-                  <span class="text-3xl text-primary/50 group-hover:text-primary transition-colors mb-1">+</span>
-                  <span class="text-[9px] font-black uppercase tracking-widest text-primary/70 group-hover:text-primary">Añadir</span>
+                <label class="aspect-square rounded-xl border-2 border-dashed border-primary/30 bg-blue-50 flex flex-col items-center justify-center cursor-pointer hover:bg-blue-100 hover:border-primary transition-all group shadow-inner">
+                  <span class="text-3xl font-light text-primary/40 group-hover:text-primary transition-colors leading-none">+</span>
+                  <span class="text-[8px] font-black uppercase tracking-widest text-primary/60 group-hover:text-primary">Subir</span>
                   <input type="file" multiple (change)="onFileSelected($event)" class="hidden" accept="image/jpeg,image/png,image/webp" />
                 </label>
               </div>
 
-              <div *ngIf="isUploading" class="mt-4">
-                <progress class="progress progress-primary w-full" [value]="uploadProgress" max="100"></progress>
-                <p class="text-center text-xs font-bold text-primary mt-1">Sincronizando... {{uploadProgress}}%</p>
+              <div *ngIf="isUploading" class="mt-3 bg-blue-50 p-2 rounded-lg border border-blue-100 animate-pulse">
+                <progress class="progress progress-primary w-full h-1.5" [value]="uploadProgress" max="100"></progress>
+                <p class="text-center text-[10px] font-bold text-primary mt-1">Sincronizando la nube... {{uploadProgress}}%</p>
               </div>
             </div>
 
-            <div class="pt-6">
-              <button type="submit" class="btn btn-primary w-full h-16 rounded-2xl font-black uppercase text-base shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
+            <div class="pt-3 border-t border-slate-100 mt-2">
+              <button type="submit" class="btn btn-primary w-full h-13 rounded-2xl font-black uppercase text-sm shadow-lg shadow-primary/20 hover:scale-[1.01] active:scale-95 transition-all">
                 Guardar Registro
               </button>
-              <button type="button" (click)="resetForm()" *ngIf="isEditing" class="btn btn-ghost btn-xs text-error font-black w-full mt-2">Cancelar Edición</button>
+              <button type="button" (click)="resetForm()" *ngIf="isEditing" class="btn btn-ghost btn-sm text-error font-black w-full mt-2 text-xs">✕ Cancelar Edición</button>
             </div>
           </form>
         </div>
 
-        <div class="card bg-white shadow-2xl rounded-[2rem] overflow-hidden border border-slate-100">
-          <div class="bg-[#004bad] p-6 text-center shadow-lg">
-            <h2 class="text-white font-black uppercase tracking-tighter text-lg">Nueva Evidencia de Video</h2>
+        <div id="evidencia_form" class="card bg-white shadow-2xl rounded-[2rem] overflow-hidden border border-slate-100 animate-fade-in-left">
+          <div class="bg-[#0a1120] p-4 text-center shadow-lg border-b border-white/5 flex justify-between items-center px-6">
+            <h2 class="text-white font-black uppercase tracking-tighter text-base">Gestión de Evidencias</h2>
+            <div *ngIf="isVideoEditing" class="badge badge-success font-black text-[9px] px-3 py-2 border-none">
+              EDITANDO
+            </div>
           </div>
-          <div class="card-body p-8 space-y-4">
-            <select [(ngModel)]="newVideoCategory" class="select select-bordered w-full h-14 font-bold text-sm bg-slate-50 border-primary focus:ring-4 focus:ring-primary/10 transition-all">
+          <div class="card-body p-5 md:p-6 space-y-3.5">
+            <select [(ngModel)]="newVideoCategory" class="select select-bordered select-sm w-full h-11 font-bold text-xs bg-slate-50 border-slate-200 focus:ring-2 focus:ring-slate-300 focus:border-slate-400 transition-all truncate">
               <option value="maintenanceVideos">🛠 Mantenimiento</option>
               <option value="potenciacionVideos">🚀 Repotenciación</option>
               <option value="designVideos">📐 Diseño 3D</option>
               <option value="fabricacionVideos">🏭 Fabricación</option>
+              <option value="alianzasVideos">🤝 Alianzas Estratégicas</option>
               <option value="domoticaVideos">🏠 Domótica</option>
             </select>
-            <input type="text" [(ngModel)]="newVideoTitle" placeholder="Título del Video" class="input input-bordered w-full h-14 font-bold text-slate-700" />
-            <input type="text" [(ngModel)]="newVideoUrl" placeholder="URL Completa de YouTube" class="input input-bordered w-full h-14 font-bold text-slate-700 text-xs" />
+            <input type="text" [(ngModel)]="newVideoTitle" placeholder="Título Comercial del Video" class="input input-bordered input-sm w-full h-11 font-bold text-slate-800 text-sm bg-white" />
+            <input type="text" [(ngModel)]="newVideoUrl" placeholder="URL Completa de YouTube (Ej: https://www.youtube.com/watch?v=...)" class="input input-bordered input-sm w-full h-11 font-bold text-slate-700 text-[10px] bg-white" />
 
-            <button type="button" (click)="addVideo()" class="btn btn-primary w-full h-16 rounded-2xl font-black uppercase mt-4 shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
-              Registrar Video como Evidencia
-            </button>
+            <div class="pt-3">
+              <button type="button" (click)="onSubmitVideo()" [class]="isVideoEditing ? 'btn btn-primary h-13' : 'btn bg-slate-900 text-white h-13'" class="w-full rounded-2xl font-black uppercase text-sm mt-1 shadow-lg shadow-slate-900/10 hover:scale-[1.01] active:scale-95 transition-all">
+                {{ isVideoEditing ? 'Guardar Cambios Certificados' : 'Registrar Video en la Nube' }}
+              </button>
+              <button type="button" (click)="cancelEditVideo()" *ngIf="isVideoEditing" class="btn btn-ghost btn-sm text-error font-black w-full mt-2 text-xs">✕ Cancelar Edición de Video</button>
+            </div>
           </div>
         </div>
       </aside>
 
-      <main class="lg:col-span-8 space-y-12">
-        <section>
-          <h2 class="text-3xl font-black text-slate-900 uppercase tracking-tighter mb-8 flex items-center gap-4 animate-fade-in">
-            <span class="w-3 h-10 bg-primary rounded-full"></span> Inventario de Tecnología Biomédica
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            <div *ngFor="let p of productos; let i = index" class="card bg-white shadow-md border border-slate-100 rounded-[2.5rem] overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+      <main class="lg:col-span-8 xl:col-span-9 space-y-12">
 
-              <figure class="aspect-square bg-slate-50 p-6 flex-shrink-0 relative overflow-hidden group/img">
+        <section class="animate-fade-in-up">
+          <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-8 justify-between border-l-4 border-primary pl-4">
+            <h2 class="text-2xl md:text-3xl font-black text-slate-950 uppercase tracking-tighter leading-none flex items-center gap-3">
+              <span class="w-2.5 h-2.5 bg-primary rounded-full hidden md:block"></span> Inventario de Tecnología Biomédica
+            </h2>
+            <p class="text-[10px] font-black uppercase text-slate-400 tracking-widest">{{ filteredProducts?.length || productos.length }} Equipos en Lista</p>
+          </div>
 
-                <div class="w-full h-full relative group-hover/img:scale-105 transition-transform duration-700">
+          <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 xl:gap-6">
+            <div *ngFor="let p of productos; let i = index" class="card bg-white shadow-lg border border-slate-100 rounded-[2rem] overflow-hidden hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col h-full animate-fade-in-up" [style.animation-delay]="(i * 50) + 'ms'">
+
+              <figure class="aspect-square bg-slate-50 flex-shrink-0 relative overflow-hidden group p-5 border-b border-slate-100">
+
+                <div class="w-full h-full relative group-hover:scale-105 transition-transform duration-700 ease-out">
                   <ng-container *ngIf="p.fotos && p.fotos.length > 0; else singleImgAdmin">
                     <img *ngFor="let img of p.fotos; let imgIndex = index"
                          [src]="img"
-                         alt="{{ p.nombre }}"
+                         alt="{{ p.nombre }} JPC Electronics"
                          [class.opacity-100]="(indicesImagenes[i] || 0) === imgIndex"
                          [class.opacity-0]="(indicesImagenes[i] || 0) !== imgIndex"
                          class="absolute inset-0 w-full h-full object-contain mix-blend-multiply transition-opacity duration-300" />
                   </ng-container>
                   <ng-template #singleImgAdmin>
-                    <img [src]="p.foto || 'assets/logo.webp'" alt="{{ p.nombre }}" class="w-full h-full object-contain mix-blend-multiply" />
+                    <img [src]="p.foto || 'assets/logo.webp'" alt="{{ p.nombre }}" class="w-full h-full object-contain mix-blend-multiply p-2" />
                   </ng-template>
                 </div>
 
-                <div *ngIf="p.fotos && p.fotos.length > 1" class="absolute inset-0 flex items-center justify-between px-3 z-20 pointer-events-none opacity-0 group-hover/img:opacity-100 transition-opacity duration-300">
-                  <button type="button" (click)="anteriorImagen(i, $event, p.fotos.length)" class="pointer-events-auto w-8 h-8 rounded-full bg-white/95 backdrop-blur text-slate-800 flex items-center justify-center hover:bg-primary hover:text-white shadow-[0_4px_15px_rgba(0,0,0,0.2)] transition-colors border border-slate-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+                <div *ngIf="p.fotos && p.fotos.length > 1" class="absolute inset-0 flex items-center justify-between px-2 z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button type="button" (click)="anteriorImagen(i, $event, p.fotos.length)" class="pointer-events-auto w-7 h-7 rounded-full bg-white/95 backdrop-blur text-slate-800 flex items-center justify-center hover:bg-primary hover:text-white shadow-xl transition-colors border border-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-3.5 h-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
                   </button>
-                  <button type="button" (click)="siguienteImagen(i, $event, p.fotos.length)" class="pointer-events-auto w-8 h-8 rounded-full bg-white/95 backdrop-blur text-slate-800 flex items-center justify-center hover:bg-primary hover:text-white shadow-[0_4px_15px_rgba(0,0,0,0.2)] transition-colors border border-slate-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                  <button type="button" (click)="siguienteImagen(i, $event, p.fotos.length)" class="pointer-events-auto w-7 h-7 rounded-full bg-white/95 backdrop-blur text-slate-800 flex items-center justify-center hover:bg-primary hover:text-white shadow-xl transition-colors border border-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-3.5 h-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
                   </button>
                 </div>
 
-                <div *ngIf="p.fotos && p.fotos.length > 1" class="absolute bottom-4 left-0 right-0 flex justify-center gap-1.5 z-20 pointer-events-none">
-                  <div *ngFor="let img of p.fotos; let imgIndex = index" [class]="(indicesImagenes[i] || 0) === imgIndex ? 'w-4 bg-primary shadow-md' : 'w-1.5 bg-slate-300/80 border border-slate-400/20'" class="h-1.5 rounded-full transition-all duration-300"></div>
+                <div *ngIf="p.fotos && p.fotos.length > 1" class="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-20 pointer-events-none">
+                  <div *ngFor="let img of p.fotos; let imgIndex = index" [class]="(indicesImagenes[i] || 0) === imgIndex ? 'w-3.5 bg-primary shadow-md' : 'w-1.5 bg-slate-300/80'" class="h-1.5 rounded-full transition-all duration-300"></div>
                 </div>
 
-                <div class="absolute top-4 right-4 badge badge-primary font-black uppercase tracking-widest text-[10px] z-10">{{ p.categoria }}</div>
+                <div class="absolute top-3 right-3 badge badge-primary font-black uppercase tracking-widest text-[9px] z-10 p-2.5 border-none shadow-xl">{{ p.categoria }}</div>
               </figure>
 
-              <div class="p-8 flex flex-col justify-between flex-grow bg-white">
+              <div class="p-5 md:p-6 flex flex-col justify-between flex-grow bg-white">
                 <div>
-                  <h3 class="font-black uppercase tracking-tighter text-slate-900 text-lg leading-tight group-hover:text-primary transition-colors">{{ p.nombre }}</h3>
-                  <p class="text-xs text-slate-500 font-medium italic mt-2 line-clamp-2">{{ p.descripcion }}</p>
+                  <h3 class="font-black uppercase tracking-tighter text-slate-950 text-base leading-tight group-hover:text-primary transition-colors">{{ p.nombre }}</h3>
+                  <p class="text-[11px] text-slate-500 font-medium italic mt-1.5 line-clamp-2 leading-relaxed">{{ p.descripcion }}</p>
                 </div>
-                <div class="flex gap-2 mt-6 pt-4 border-t border-slate-100">
-                  <button type="button" (click)="editProduct(p)" class="btn btn-ghost btn-xs text-primary font-black text-[11px] uppercase tracking-widest hover:bg-transparent">Editar →</button>
-                  <button type="button" (click)="deleteProduct(p.id!)" class="btn btn-ghost btn-xs text-error font-black text-[11px] uppercase tracking-widest hover:bg-transparent">Baja Técnica ×</button>
+                <div class="flex items-center justify-between mt-5 pt-4 border-t border-slate-100 flex-wrap gap-1">
+                  <button type="button" (click)="editProduct(p)" class="btn btn-ghost btn-xs text-primary font-black text-[10px] uppercase tracking-widest hover:bg-transparent px-1 hover:text-blue-700">Editar →</button>
+                  <button type="button" (click)="deleteProduct(p.id!)" class="btn btn-ghost btn-xs text-error font-black text-[10px] uppercase tracking-widest hover:bg-transparent px-1 hover:text-red-700">Baja Técnica ×</button>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section>
-          <h2 class="text-3xl font-black text-slate-900 uppercase tracking-tighter mb-8 flex items-center gap-4 animate-fade-in">
-            <span class="w-3 h-10 bg-[#0a1120] rounded-full"></span> Evidencias Globales Certificadas
-          </h2>
-          <div class="grid grid-cols-1 gap-8">
-            <div *ngFor="let v of videos" class="flex flex-col md:flex-row bg-white rounded-[3rem] shadow-md border border-slate-100 overflow-hidden group hover:shadow-2xl transition-all duration-300">
-              <div class="md:w-72 aspect-video bg-black flex-shrink-0 relative">
-                <iframe [src]="v.sanitizedUrl" class="w-full h-full border-none opacity-90 group-hover:opacity-100 transition-opacity"></iframe>
+        <section class="animate-fade-in-up mt-16 pb-10">
+          <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-8 pl-4 border-l-4 border-slate-900 justify-between">
+            <h2 class="text-2xl md:text-3xl font-black text-slate-950 uppercase tracking-tighter leading-none flex items-center gap-3">
+              <span class="w-2.5 h-2.5 bg-slate-900 rounded-full hidden md:block"></span> Evidencias Globales Certificadas
+            </h2>
+            <p class="text-[10px] font-black uppercase text-slate-400 tracking-widest">Ordenado por Categoría Técnica</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-7 xl:gap-8">
+            <div *ngFor="let v of videos; let vi = index" class="card bg-white shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden group border border-slate-100 rounded-[2.5rem] flex flex-col animate-fade-in-up" [style.animation-delay]="(vi * 70) + 'ms'">
+
+              <div class="w-full aspect-video bg-slate-950 flex-shrink-0 relative overflow-hidden">
+                <iframe [src]="v.sanitizedUrl" class="w-full h-full border-none opacity-80 group-hover:opacity-100 group-hover:scale-101 transition-all duration-500" allowfullscreen loading="lazy"></iframe>
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/30 to-transparent pointer-events-none transition-opacity opacity-100 group-hover:opacity-0"></div>
               </div>
-              <div class="p-10 flex flex-col justify-between flex-1">
+
+              <div class="card-body p-6 md:p-8 flex flex-col justify-between flex-1 bg-white">
                 <div>
-                  <div class="badge badge-primary badge-outline text-[11px] font-black uppercase mb-3 tracking-wider px-4 py-3">{{ v.categoryName }}</div>
-                  <h4 class="font-black uppercase text-slate-800 text-xl tracking-tighter leading-tight">{{ v.title }}</h4>
-                  <p *ngIf="v.description" class="text-base text-slate-500 font-medium mt-3 line-clamp-2 italic leading-relaxed">{{ v.description }}</p>
+                  <div class="flex items-center gap-2 mb-3">
+                    <span class="text-xs text-slate-400">#{{ordenPrioridadVideos.indexOf(v.categoryId) + 1}}</span>
+                    <div class="badge badge-primary badge-outline text-[10px] font-black uppercase tracking-wider px-3.5 py-2.5 rounded-lg border border-primary/40 text-primary">{{ v.categoryName }}</div>
+                  </div>
+                  <h4 class="font-black uppercase text-slate-900 text-lg md:text-xl tracking-tighter leading-tight group-hover:text-primary transition-colors">{{ v.title }}</h4>
+                  <p *ngIf="v.description" class="text-sm text-slate-500 font-medium mt-3 line-clamp-2 italic leading-relaxed">{{ v.description }}</p>
                 </div>
-                <div class="flex items-center justify-between mt-6 pt-6 border-t border-slate-50">
-                  <button type="button" (click)="deleteVideo(v.categoryId, v.id!)" class="btn btn-ghost btn-sm text-error font-black text-[11px] uppercase tracking-wider hover:bg-red-50 px-4 rounded-full">Eliminar Registro</button>
-                  <p class="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">JPC Verification System</p>
+
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-6 pt-5 border-t border-slate-100 gap-4">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <button type="button" (click)="startEditVideo(v)" class="btn btn-outline btn-primary btn-xs font-black text-[10px] uppercase tracking-wider px-4 rounded-full border-2 hover:bg-primary hover:text-white hover:border-primary">
+                      <span class="mr-1">✎</span> Editar Evidencia
+                    </button>
+                    <button type="button" (click)="deleteVideo(v.categoryId, v.id!)" class="btn btn-ghost btn-xs text-error font-black text-[10px] uppercase tracking-wider hover:bg-red-50 px-4 rounded-full hover:text-red-800">
+                      × Eliminar Registro
+                    </button>
+                  </div>
+                  <p class="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] text-right">JPC Verification</p>
                 </div>
               </div>
             </div>
