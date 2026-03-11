@@ -23,6 +23,15 @@ export class CatalogoComponent implements OnInit {
   selectedProduct: any | null = null;
   indicesImagenes: { [key: number]: number } = {};
 
+  private ordenCategorias: { [key: string]: number } = {
+    'Ambulancia': 1,
+    'Mobilirio Medico': 2,
+    'Equipo Medico': 3,
+    'Mobiliario Oficina': 4,
+    'Utileria Medica': 5,
+    'Diagnostico': 6
+  };
+
   ngOnInit(): void {
     this.productoService.getProducto().subscribe({
       next: (products: Producto[]) => {
@@ -37,7 +46,7 @@ export class CatalogoComponent implements OnInit {
   }
 
   applyFilters(): void {
-    let products = this.allProducts;
+    let products = [...this.allProducts];
 
     if (this.searchTerm) {
       const term = this.searchTerm.toLowerCase();
@@ -53,6 +62,12 @@ export class CatalogoComponent implements OnInit {
         p.categoria.toLowerCase() === this.selectedCategory.toLowerCase()
       );
     }
+
+    products.sort((a, b) => {
+      const pesoA = this.ordenCategorias[a.categoria] || 99;
+      const pesoB = this.ordenCategorias[b.categoria] || 99;
+      return pesoA - pesoB;
+    });
 
     this.filteredProducts = products;
 
