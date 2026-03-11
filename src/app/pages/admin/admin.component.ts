@@ -32,9 +32,11 @@ interface ImageItem {
 export class AdminComponent implements OnInit {
   private productoService = inject(ProductoService);
   private ngZone = inject(NgZone);
-  private authService = inject(AuthService);
+  private authService: any = inject(AuthService);
   private uploadService = inject(UploadService);
   private domSanitizer = inject(DomSanitizer);
+
+  public filteredProducts: any[] | null = null;
 
   productos: any[] = [];
   productoSeleccionado: any = { nombre: '', descripcion: '', categoria: '', tipo: '', foto: '' };
@@ -52,18 +54,15 @@ export class AdminComponent implements OnInit {
   isUploading = false;
 
   videos: VideoDisplay[] = [];
-  // Estados de edición de video
   isVideoEditing = false;
   editingVideoId: string | null = null;
   editingVideoCategoryId: string = '';
 
-  // Modelo para el formulario de video
   newVideoTitle: string = '';
   newVideoUrl: string = '';
   newVideoCategory: string = 'maintenanceVideos';
 
-  // Orden de prioridad solicitado para los videos
-  private ordenPrioridadVideos = [
+  public ordenPrioridadVideos = [
     'potenciacionVideos',
     'designVideos',
     'fabricacionVideos',
@@ -222,7 +221,7 @@ export class AdminComponent implements OnInit {
   }
 
   editProduct(producto: any): void {
-    this.cancelEditVideo(); // Cancelar edición de video si está activa
+    this.cancelEditVideo();
     this.isEditing = true;
     this.selectedProductId = producto.id || null;
     this.productoSeleccionado = { ...producto };
@@ -300,9 +299,8 @@ export class AdminComponent implements OnInit {
   async loadVideos(): Promise<void> {
     this.videos = [];
     try {
-      // Cargar todos los videos primero
       const allFirebaseVideosPromises = this.seccionesClasificacion.map(sec =>
-        this.authService.getVideos(sec.id as any).then(firebaseVideos => ({
+        this.authService.getVideos(sec.id as any).then((firebaseVideos: any[]) => ({
           secId: sec.id,
           secName: sec.name,
           firebaseVideos
@@ -311,10 +309,9 @@ export class AdminComponent implements OnInit {
 
       const results = await Promise.all(allFirebaseVideosPromises);
 
-      // Mapear y combinar
       let tempVideos: VideoDisplay[] = [];
       results.forEach(result => {
-        const mapped = result.firebaseVideos.map(video => ({
+        const mapped = result.firebaseVideos.map((video: any) => ({
           id: video.id,
           title: video.title,
           description: (video as any).description || '',
@@ -326,11 +323,9 @@ export class AdminComponent implements OnInit {
         tempVideos = [...tempVideos, ...mapped];
       });
 
-      // Ordenar por prioridad de categoría
       tempVideos.sort((a, b) => {
         const indexA = this.ordenPrioridadVideos.indexOf(a.categoryId);
         const indexB = this.ordenPrioridadVideos.indexOf(b.categoryId);
-        // Si no se encuentra (-1), lo mandamos al final
         const priorityA = indexA === -1 ? 999 : indexA;
         const priorityB = indexB === -1 ? 999 : indexB;
         return priorityA - priorityB;
@@ -377,22 +372,20 @@ export class AdminComponent implements OnInit {
   }
 
   startEditVideo(video: VideoDisplay): void {
-    this.resetForm(); // Cancelar edición de inventario si está activa
+    this.resetForm();
     this.isVideoEditing = true;
     this.editingVideoId = video.id || null;
     this.editingVideoCategoryId = video.categoryId;
 
-    // Rellenar el formulario de la izquierda con los datos actuales (COMO EN EL CATALOGO)
     this.newVideoTitle = video.title;
     this.newVideoUrl = video.rawUrl;
     this.newVideoCategory = video.categoryId;
 
-    // Scroll hasta el formulario de video
     const videoForm = document.getElementById('evidencia_form');
     if (videoForm) {
       videoForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
-      window.scrollTo({ top: 300, behavior: 'smooth' }); // Fallback
+      window.scrollTo({ top: 300, behavior: 'smooth' });
     }
   }
 
@@ -406,7 +399,7 @@ export class AdminComponent implements OnInit {
     this.editingVideoCategoryId = '';
     this.newVideoTitle = '';
     this.newVideoUrl = '';
-    this.newVideoCategory = 'maintenanceVideos'; // Valor por defecto
+    this.newVideoCategory = 'maintenanceVideos';
   }
 
   async saveVideo(): Promise<void> {
@@ -420,14 +413,10 @@ export class AdminComponent implements OnInit {
         url: embedUrl
       };
 
-      // Si cambió de categoría, debemos eliminar del viejo y agregar al nuevo collection
       if (this.newVideoCategory !== this.editingVideoCategoryId) {
-        // Eliminar del viejo collection
         await this.authService.deleteVideo(this.editingVideoCategoryId as any, this.editingVideoId);
-        // Agregar al nuevo collection
         await this.authService.addVideo(this.newVideoCategory as any, updateData);
       } else {
-        // Si es la misma categoría, solo actualizar el documento
         await this.authService.updateVideo(this.editingVideoCategoryId as any, this.editingVideoId, updateData);
       }
 
@@ -444,7 +433,6 @@ export class AdminComponent implements OnInit {
     if (confirm('¿Eliminar registro definitivo del video?')) {
       try {
         await this.authService.deleteVideo(categoryId as any, id);
-        // Si estábamos editando este video, resetear formulario
         if (this.isVideoEditing && this.editingVideoId === id) {
           this.resetVideoForm();
         }
@@ -459,14 +447,14 @@ export class AdminComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.isUploading = true;
       this.uploadService.uploadFile(file).subscribe({
-        next: (upload) => {
+        next: (upload: any) => {
           this.ngZone.run(() => this.uploadProgress = upload.progress);
           if (upload.downloadURL && upload.path) {
             this.isUploading = false;
             resolve({ downloadURL: upload.downloadURL, path: upload.path });
           }
         },
-        error: (err) => { this.isUploading = false; reject(err); }
+        error: (err: any) => { this.isUploading = false; reject(err); }
       });
     });
   }
