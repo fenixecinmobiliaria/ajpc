@@ -103,6 +103,35 @@ export const SERVICIOS: Servicio[] = [
     mensajeWhatsApp: 'Hola JPC Electronics, quiero información sobre equipos médicos didácticos.'
   },
   {
+    id: 'impresion-3d',
+    titulo: 'Diseño e Impresión 3D de Piezas',
+    etiqueta: 'Diseño CAD y fabricación',
+    imagen: 'assets/imagenes/servicios/foto-impresion-3d.webp',
+    captura: 'assets/imagenes/servicios/captura-impresion-3d.webp',
+    resumen:
+      'Diseñamos en 3D (Autodesk Inventor y Fusion) e imprimimos piezas a medida: cajas y carcasas para controles ' +
+      'electrónicos, paneles, soportes y prototipos, listos para montar en equipos reales.',
+    puntos: [
+      { icono: '📐', titulo: 'Diseño CAD', imagen: 'assets/imagenes/servicios/impresion-3d-diseno.webp',
+        texto: 'Modelamos cada pieza en 3D con sus medidas, encajes y tornillería antes de fabricarla.' },
+      { icono: '🖨️', titulo: 'Impresión 3D', imagen: 'assets/imagenes/servicios/impresion-3d-pieza.webp',
+        texto: 'Imprimimos carcasas, marcos y soportes a medida, en pocas piezas o en pequeñas series.' },
+      { icono: '✅', titulo: 'Pieza terminada', imagen: 'assets/imagenes/servicios/impresion-3d-terminado.webp',
+        texto: 'Integramos la pieza con la electrónica: por ejemplo, los paneles de control de las camas hospitalarias.' }
+    ],
+    dirigidoA: ['Empresas y talleres', 'Emprendedores y prototipos', 'Universidades y estudiantes'],
+    videos: [{
+      src: 'assets/videos/diseno-impresion-3d.mp4',
+      portada: 'assets/imagenes/servicios/impresion-3d-portada-video.jpg',
+      titulo: 'Del diseño en 3D a la pieza impresa',
+      parrafos: [
+        'Diseño de las cajas para los controles de las barandas de las camas hospitalarias: el modelo en Inventor, ' +
+          'las piezas impresas y el panel de control terminado.'
+      ]
+    }],
+    mensajeWhatsApp: 'Hola JPC Electronics, quiero información sobre el diseño e impresión 3D de piezas.'
+  },
+  {
     id: 'paginas-web',
     titulo: 'Desarrollo de Páginas Web y Software',
     etiqueta: 'Software a medida',
