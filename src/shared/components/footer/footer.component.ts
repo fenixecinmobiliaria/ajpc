@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { SERVICIOS } from '../../../app/pages/servicio/servicios.data';
 
 @Component({
   selector: 'app-footer',
@@ -12,16 +13,19 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class FooterComponent {
   private sanitizer = inject(DomSanitizer);
 
-  public currentYear: number = 2026;
-  public devName: string = 'Juan Diego Torres';
-  public devPhone: string = '+593 999 734 486';
-  public devEmail: string = 'jtorresm14@est.ups.edu.ec';
+  public currentYear: number = new Date().getFullYear();
+  public readonly servicios = SERVICIOS;
 
-  public jpcPhone: string = '+593 998 683 511';
+  // Contacto oficial de JPC Electronics (Ing. Patricio Campozano).
+  public jpcPhone: string = '098 092 9669';
+  public jpcWhatsApp: string = 'https://wa.me/593980929669?text=' + encodeURIComponent('Hola JPC Electronics, vi su sitio web y quiero información.');
+  public jpcEmail: string = 'jpcelectronics2025@gmail.com';
   public jpcFacebook: string = 'JPC ELECTRONICS';
-  public googleMapsSearch: string = 'https://www.google.com/maps/search/?api=1&query=Euclides+y+Esquilo,+Cuenca,+Ecuador';
+  // Por seguridad solo se muestra la zona (Urb. El Cebollar), no la dirección exacta.
+  public ubicacion: string = 'Urb. El Cebollar, Cuenca';
+  public googleMapsSearch: string = 'https://www.google.com/maps/search/?api=1&query=El+Cebollar,+Cuenca,+Ecuador';
 
   public mapEmbedUrl: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.72749!2d-79.030999!3d-2.888999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91cd3cf227b36605%3A0xc477121c944eb3f4!2sEuclides%20y%20Esquilo%2C%20Cuenca!5e0!3m2!1ses-419!2sec!4v1740999999999!5m2!1ses-419!2sec'
+    'https://maps.google.com/maps?q=El+Cebollar,+Cuenca,+Ecuador&z=14&output=embed'
   );
 }
