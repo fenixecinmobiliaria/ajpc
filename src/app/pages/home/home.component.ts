@@ -6,6 +6,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { Subscription, take } from 'rxjs';
 import { ProductoService } from '../../services/producto.service';
 import { SERVICIOS } from '../servicio/servicios.data';
+import { LOGROS_ORDENADOS } from '../logros/logros.data';
 
 /** Una diapositiva del carrusel de la portada. */
 interface Diapositiva {
@@ -26,6 +27,8 @@ interface Diapositiva {
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   /** Los 5 servicios nuevos, que van debajo de las 6 tarjetas originales. */
   readonly servicios = SERVICIOS;
+  /** Los 3 logros más recientes para la portada; la lista completa está en /logros. */
+  readonly logros = LOGROS_ORDENADOS.slice(0, 3);
 
   @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
 

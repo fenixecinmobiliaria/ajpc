@@ -1,0 +1,54 @@
+<div class="min-h-screen bg-slate-50 font-sans pb-20">
+  <section class="relative bg-gradient-to-br from-[#0A1630] via-[#0b2a6b] to-[#0057D9] text-white overflow-hidden">
+    <div class="absolute top-0 left-0 right-0 flex h-1.5" aria-hidden="true"><div class="flex-1 bg-[#FFDD00]"></div><div class="flex-1 bg-[#0057D9]"></div><div class="flex-1 bg-[#D7141A]"></div></div>
+    <div class="max-w-5xl mx-auto px-6 pt-16 pb-28 text-center">
+      <span class="inline-block text-[#FFDD00] text-xs font-black uppercase tracking-[0.25em] mb-4">JPC Electronics · Hecho en Cuenca</span>
+      <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4">Nuestros logros</h1>
+      <p class="text-lg text-[#F2F5FB]/90 font-medium max-w-2xl mx-auto leading-relaxed">
+        Una trayectoria que impulsa nuevos desarrollos: reconocimientos a la innovación, selección nacional y participación en incubación.
+      </p>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-4 -mt-16 relative z-10">
+    <ol class="relative border-l-4 border-[#0057D9]/20 ml-3 md:ml-6 space-y-10">
+      @for (l of logros; track l.id) {
+        <li class="relative pl-8 md:pl-12">
+          <span class="absolute -left-[14px] top-8 w-6 h-6 rounded-full bg-[#FFDD00] border-4 border-white shadow" aria-hidden="true"></span>
+          <article class="bg-white rounded-3xl shadow-xl overflow-hidden md:flex">
+            @if (l.imagen) {
+              <div class="md:w-2/5 shrink-0 bg-[#0A1630] aspect-[4/3] md:aspect-auto md:min-h-[260px] relative">
+                <img [src]="l.imagen" [alt]="l.titulo" loading="lazy"
+                     class="absolute inset-0 w-full h-full"
+                     [class.object-cover]="l.ajuste !== 'contain'"
+                     [class.object-contain]="l.ajuste === 'contain'" />
+              </div>
+            }
+            <div class="p-7 md:p-8 flex flex-col justify-center">
+              <div class="flex flex-wrap items-center gap-2 mb-3">
+                <span class="bg-[#0057D9] text-white text-xs font-black px-3 py-1 rounded-full">{{ l.anio }}</span>
+                <span class="text-[11px] font-black uppercase tracking-widest text-[#0057D9]">{{ l.tipo }}</span>
+              </div>
+              <div class="w-12 h-1 bg-[#FFDD00] rounded mb-3" aria-hidden="true"></div>
+              <h2 class="text-2xl md:text-3xl font-black text-[#0A1630] tracking-tight">{{ l.titulo }}</h2>
+              <p class="font-bold text-slate-700 mt-1">{{ l.subtitulo }}</p>
+              <p class="text-slate-600 mt-3 leading-relaxed">{{ l.descripcion }}</p>
+              @if (l.enlace) {
+                <a [href]="l.enlace.url" target="_blank" rel="noopener" class="mt-4 text-[#0057D9] font-bold underline">{{ l.enlace.texto }}</a>
+              }
+            </div>
+          </article>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <section class="max-w-3xl mx-auto px-4 mt-16 text-center">
+    <p class="font-black text-[#0A1630] text-lg">Ing. Patricio Campozano · Fundador de JPC Electronics</p>
+    <p class="text-slate-600 mt-2">Desarrollamos equipos médicos, electrónica y software; hoy ampliamos nuestro trabajo hacia la tecnología asistiva.</p>
+    <a [href]="enlaceWhatsApp" target="_blank" rel="noopener"
+       class="mt-8 inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#1ebe5b] text-white font-black uppercase tracking-wide px-8 py-4 rounded-full shadow-lg transition-colors">
+      Conversemos sobre innovación y colaboración
+    </a>
+  </section>
+</div>

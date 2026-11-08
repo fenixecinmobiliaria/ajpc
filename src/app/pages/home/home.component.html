@@ -113,6 +113,38 @@
     </div>
   </section>
 
+  <section class="py-20 bg-white" aria-labelledby="titulo-logros">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+        <div>
+          <span class="text-[11px] font-black uppercase tracking-[0.25em] text-[#0057D9]">Trayectoria</span>
+          <h2 id="titulo-logros" class="text-4xl lg:text-5xl font-black text-[#0A1630] tracking-tighter">Nuestros logros</h2>
+        </div>
+        <a routerLink="/logros" class="self-start md:self-auto inline-flex items-center gap-2 bg-[#0057D9] hover:bg-[#0047b3] text-white font-black text-sm uppercase tracking-wide px-6 py-3 rounded-full shadow transition-colors">
+          Ver todos los logros <span aria-hidden="true">→</span>
+        </a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        @for (l of logros; track l.id) {
+          <a routerLink="/logros" class="group bg-slate-50 rounded-3xl overflow-hidden shadow hover:shadow-xl hover:-translate-y-1 transition-all">
+            @if (l.imagen) {
+              <div class="aspect-[4/3] bg-[#0A1630] relative overflow-hidden">
+                <img [src]="l.imagen" [alt]="l.titulo" loading="lazy" class="absolute inset-0 w-full h-full group-hover:scale-105 transition-transform duration-500"
+                     [class.object-cover]="l.ajuste !== 'contain'" [class.object-contain]="l.ajuste === 'contain'" />
+              </div>
+            }
+            <div class="p-6">
+              <span class="text-[11px] font-black uppercase tracking-widest text-[#0057D9]">{{ l.anio }} · {{ l.tipo }}</span>
+              <div class="w-10 h-1 bg-[#FFDD00] rounded my-2" aria-hidden="true"></div>
+              <h3 class="text-xl font-black text-[#0A1630]">{{ l.titulo }}</h3>
+              <p class="text-sm font-semibold text-slate-600 mt-1">{{ l.subtitulo }}</p>
+            </div>
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
   @defer (on viewport) {
     <section class="py-28 bg-[#f8fafc] border-y border-blue-100 relative overflow-hidden">
       <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/dna.png')]"></div>

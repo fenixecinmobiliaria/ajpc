@@ -10,6 +10,7 @@ import { DisenoInventorComponent } from './pages/diseno-inventor/diseno-inventor
 import { AlianzasEstrategicasComponent } from './pages/alianzas-estrategicas/alianzas-estrategicas.component';
 import { AuthGuard } from './auth.guard';
 import { ServicioComponent } from './pages/servicio/servicio.component';
+import { LogrosComponent } from './pages/logros/logros.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,5 +24,6 @@ export const routes: Routes = [
   { path: 'diseno-inventor', component: DisenoInventorComponent },
   { path: 'alianzas-estrategicas', component: AlianzasEstrategicasComponent },
   { path: 'servicios/:id', component: ServicioComponent },
+  { path: 'logros', component: LogrosComponent },
   { path: '**', redirectTo: 'home' }
 ];
