@@ -15,7 +15,10 @@ export class LogrosComponent implements OnDestroy {
   private readonly route = inject(ActivatedRoute);
   private readonly sub = this.route.fragment.subscribe(f => {
     if (!f) return;
-    setTimeout(() => document.getElementById(f)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
+    // Salto directo, repetido cuando la página termina de acomodarse (imágenes, desplazamiento del router).
+    for (const ms of [100, 500, 1200]) {
+      setTimeout(() => document.getElementById(f)?.scrollIntoView({ block: 'start' }), ms);
+    }
   });
 
   ngOnDestroy(): void {
