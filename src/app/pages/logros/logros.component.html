@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-slate-50 font-sans pb-20">
+<div class="min-h-screen bg-gradient-to-b from-[#DCE9FB] via-[#EAF2FD] to-[#F2F5FB] font-sans pb-20">
   <section class="relative bg-gradient-to-br from-[#0A1630] via-[#0b2a6b] to-[#0057D9] text-white overflow-hidden">
     <div class="absolute top-0 left-0 right-0 flex h-1.5" aria-hidden="true"><div class="flex-1 bg-[#FFDD00]"></div><div class="flex-1 bg-[#0057D9]"></div><div class="flex-1 bg-[#D7141A]"></div></div>
     <div class="max-w-5xl mx-auto px-6 pt-16 pb-28 text-center">
@@ -10,55 +10,44 @@
     </div>
   </section>
 
-  <section class="max-w-4xl mx-auto px-4 -mt-16 relative z-10">
-    <ol class="relative border-l-4 border-[#0057D9]/20 ml-3 md:ml-6 space-y-10">
-      @for (l of logros; track l.id) {
-        <li class="relative pl-8 md:pl-12">
-          <span class="absolute -left-[14px] top-8 w-6 h-6 rounded-full bg-[#FFDD00] border-4 border-white shadow" aria-hidden="true"></span>
-          <article class="bg-white rounded-3xl shadow-xl overflow-hidden md:flex">
-            @if (l.video) {
-              <div class="md:w-2/5 shrink-0 bg-[#0A1630] flex items-center justify-center p-4">
-                <video [src]="l.video" [poster]="l.imagen" controls playsinline preload="none"
-                       class="w-full max-w-[300px] aspect-[9/16] rounded-2xl bg-black shadow-lg"
-                       [attr.aria-label]="'Video: ' + l.titulo"></video>
-              </div>
-            } @else if (l.imagen) {
-              <div class="md:w-2/5 shrink-0 bg-[#0A1630] aspect-[4/3] md:aspect-auto md:min-h-[260px] relative">
-                <img [src]="l.imagen" [alt]="l.titulo" loading="lazy"
-                     class="absolute inset-0 w-full h-full"
-                     [class.object-cover]="l.ajuste !== 'contain'"
-                     [class.object-contain]="l.ajuste === 'contain'" />
-              </div>
-            } @else {
-              <div class="md:w-2/5 shrink-0 bg-gradient-to-br from-[#0A1630] to-[#0057D9] min-h-[160px] md:min-h-[220px] flex flex-col items-center justify-center gap-2 text-white" aria-hidden="true">
-                <span class="text-6xl">{{ l.icono || '🏆' }}</span>
-                <span class="text-sm font-black tracking-widest text-[#FFDD00]">{{ l.periodo || l.anio }}</span>
-              </div>
-            }
-            <div class="p-7 md:p-8 flex flex-col justify-center">
-              <div class="flex flex-wrap items-center gap-2 mb-3">
-                <span class="bg-[#0057D9] text-white text-xs font-black px-3 py-1 rounded-full">{{ l.periodo || l.anio }}</span>
-                <span class="text-[11px] font-black uppercase tracking-widest text-[#0057D9]">{{ l.tipo }}</span>
-              </div>
-              <div class="w-12 h-1 bg-[#FFDD00] rounded mb-3" aria-hidden="true"></div>
-              <h2 class="text-2xl md:text-3xl font-black text-[#0A1630] tracking-tight">{{ l.titulo }}</h2>
-              <p class="font-bold text-slate-700 mt-1">{{ l.subtitulo }}</p>
-              <p class="text-slate-600 mt-3 leading-relaxed">{{ l.descripcion }}</p>
-              @if (l.credito) {
-                <p class="text-xs text-slate-400 italic mt-3">{{ l.credito }}</p>
-              }
-              @if (l.enlace) {
-                @if (l.enlace.url.startsWith('/')) {
-                  <a [routerLink]="l.enlace.url" class="mt-4 self-start inline-flex items-center gap-2 bg-[#0057D9] hover:bg-[#0047b3] text-white text-sm font-black uppercase tracking-wide px-5 py-2 rounded-full shadow transition-colors">{{ l.enlace.texto }} <span aria-hidden="true">→</span></a>
-                } @else {
-                  <a [href]="l.enlace.url" target="_blank" rel="noopener" class="mt-4 text-[#0057D9] font-bold underline">{{ l.enlace.texto }}</a>
-                }
-              }
+  <section class="max-w-6xl mx-auto px-4 -mt-16 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+    @for (l of logros; track l.id) {
+      <article [id]="l.id" class="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col">
+        <div class="aspect-[4/3] bg-[#0A1630] relative">
+          @if (l.video) {
+            <video [src]="l.video" [poster]="l.imagen" controls playsinline preload="none"
+                   class="absolute inset-0 w-full h-full object-contain bg-black"
+                   [attr.aria-label]="'Video: ' + l.titulo"></video>
+          } @else if (l.imagen) {
+            <img [src]="l.imagen" [alt]="l.titulo" loading="lazy" class="absolute inset-0 w-full h-full"
+                 [class.object-cover]="l.ajuste !== 'contain'" [class.object-contain]="l.ajuste === 'contain'" />
+          } @else {
+            <div class="absolute inset-0 bg-gradient-to-br from-[#0A1630] to-[#0057D9] flex flex-col items-center justify-center gap-2 text-white" aria-hidden="true">
+              <span class="text-7xl">{{ l.icono || '🏆' }}</span>
+              <span class="text-sm font-black tracking-widest text-[#FFDD00]">{{ l.periodo || l.anio }}</span>
             </div>
-          </article>
-        </li>
-      }
-    </ol>
+          }
+          <span class="absolute top-4 left-4 bg-[#0057D9] text-white text-xs font-black px-3 py-1 rounded-full shadow pointer-events-none">{{ l.periodo || l.anio }}</span>
+          <span class="absolute top-4 right-4 bg-[#0A1630]/85 text-[#FFDD00] text-[11px] font-black uppercase tracking-widest px-3 py-1 rounded-full pointer-events-none">{{ l.tipo }}</span>
+        </div>
+        <div class="p-7 flex flex-col flex-1">
+          <div class="w-12 h-1 bg-[#FFDD00] rounded mb-3" aria-hidden="true"></div>
+          <h2 class="text-2xl font-black text-[#0A1630] tracking-tight">{{ l.titulo }}</h2>
+          <p class="font-bold text-slate-700 mt-1">{{ l.subtitulo }}</p>
+          <p class="text-slate-600 mt-3 leading-relaxed">{{ l.descripcion }}</p>
+          @if (l.credito) {
+            <p class="text-xs text-slate-400 italic mt-3">{{ l.credito }}</p>
+          }
+          @if (l.enlace) {
+            @if (l.enlace.url.startsWith('/')) {
+              <a [routerLink]="l.enlace.url" class="mt-4 self-start inline-flex items-center gap-2 bg-[#0057D9] hover:bg-[#0047b3] text-white text-sm font-black uppercase tracking-wide px-5 py-2 rounded-full shadow transition-colors">{{ l.enlace.texto }} <span aria-hidden="true">→</span></a>
+            } @else {
+              <a [href]="l.enlace.url" target="_blank" rel="noopener" class="mt-4 self-start text-[#0057D9] font-bold underline">{{ l.enlace.texto }}</a>
+            }
+          }
+        </div>
+      </article>
+    }
   </section>
 
   <section class="max-w-3xl mx-auto px-4 mt-16 text-center">
