@@ -16,7 +16,13 @@
         <li class="relative pl-8 md:pl-12">
           <span class="absolute -left-[14px] top-8 w-6 h-6 rounded-full bg-[#FFDD00] border-4 border-white shadow" aria-hidden="true"></span>
           <article class="bg-white rounded-3xl shadow-xl overflow-hidden md:flex">
-            @if (l.imagen) {
+            @if (l.video) {
+              <div class="md:w-2/5 shrink-0 bg-[#0A1630] flex items-center justify-center p-4">
+                <video [src]="l.video" [poster]="l.imagen" controls playsinline preload="none"
+                       class="w-full max-w-[300px] aspect-[9/16] rounded-2xl bg-black shadow-lg"
+                       [attr.aria-label]="'Video: ' + l.titulo"></video>
+              </div>
+            } @else if (l.imagen) {
               <div class="md:w-2/5 shrink-0 bg-[#0A1630] aspect-[4/3] md:aspect-auto md:min-h-[260px] relative">
                 <img [src]="l.imagen" [alt]="l.titulo" loading="lazy"
                      class="absolute inset-0 w-full h-full"
@@ -38,6 +44,9 @@
               <h2 class="text-2xl md:text-3xl font-black text-[#0A1630] tracking-tight">{{ l.titulo }}</h2>
               <p class="font-bold text-slate-700 mt-1">{{ l.subtitulo }}</p>
               <p class="text-slate-600 mt-3 leading-relaxed">{{ l.descripcion }}</p>
+              @if (l.credito) {
+                <p class="text-xs text-slate-400 italic mt-3">{{ l.credito }}</p>
+              }
               @if (l.enlace) {
                 <a [href]="l.enlace.url" target="_blank" rel="noopener" class="mt-4 text-[#0057D9] font-bold underline">{{ l.enlace.texto }}</a>
               }

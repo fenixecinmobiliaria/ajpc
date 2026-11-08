@@ -131,6 +131,11 @@
               <div class="aspect-[4/3] bg-[#0A1630] relative overflow-hidden">
                 <img [src]="l.imagen" [alt]="l.titulo" loading="lazy" class="absolute inset-0 w-full h-full group-hover:scale-105 transition-transform duration-500"
                      [class.object-cover]="l.ajuste !== 'contain'" [class.object-contain]="l.ajuste === 'contain'" />
+                @if (l.video) {
+                  <span class="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+                    <span class="w-16 h-16 rounded-full bg-white/90 text-[#0057D9] text-2xl flex items-center justify-center shadow-lg pl-1">▶</span>
+                  </span>
+                }
               </div>
             }
             <div class="p-6">

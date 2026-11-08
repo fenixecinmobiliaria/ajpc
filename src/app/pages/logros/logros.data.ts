@@ -31,6 +31,10 @@ export interface Logro {
   /** Cómo se encuadra la foto en la tarjeta: 'cover' la recorta, 'contain' la muestra entera. */
   ajuste?: 'cover' | 'contain';
   enlace?: { texto: string; url: string };
+  /** Video vertical (reel) que se reproduce en la tarjeta; 'imagen' se usa como portada. */
+  video?: string;
+  /** Crédito obligatorio cuando el material es de terceros. */
+  credito?: string;
 }
 
 export const LOGROS: Logro[] = [
@@ -57,6 +61,20 @@ export const LOGROS: Logro[] = [
       'Una oportunidad para presentar nuestra propuesta de innovación.',
     imagen: 'assets/imagenes/logros/mision-emprende-593-2026.webp',
     ajuste: 'contain'
+  },
+  {
+    id: 'visita-mipro-2026',
+    anio: 2026,
+    tipo: 'Reconocimiento',
+    titulo: 'Visita del MIPRO a nuestro laboratorio',
+    subtitulo: 'Ministerio de Producción · Cuenca, mayo de 2026',
+    descripcion:
+      'El Ing. Jaime Machado, Director del MIPRO, visitó el laboratorio de JPC Electronics en Cuenca y conoció ' +
+      'los equipos médicos que desarrollamos con tecnología 100 % ecuatoriana, como la Servocuna neonatal.',
+    imagen: 'assets/imagenes/logros/visita-mipro-2026.webp',
+    video: 'assets/videos/visita-mipro-2026.mp4',
+    credito: 'Video y audio: MIPRO · Gobierno del Ecuador',
+    icono: '🏛️'
   },
   {
     id: 'maestria-ingenieria-biomedica-ups',
