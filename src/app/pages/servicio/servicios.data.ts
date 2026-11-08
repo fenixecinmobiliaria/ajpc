@@ -8,6 +8,8 @@ export interface Servicio {
   titulo: string;
   etiqueta: string;
   imagen: string;
+  /** Captura ancha que se muestra completa arriba de la página (en lugar del ícono cuadrado). */
+  captura?: string;
   resumen: string;
   puntos: { icono: string; titulo: string; texto: string }[];
   dirigidoA: string[];
@@ -48,6 +50,7 @@ export const SERVICIOS: Servicio[] = [
     titulo: 'Plataforma de Kits Interactivos',
     etiqueta: 'Educación inclusiva',
     imagen: 'assets/imagenes/servicios/foto-kits-interactivos.webp',
+    captura: 'assets/imagenes/servicios/captura-kits-interactivos.webp',
     resumen:
       'Kits educativos físicos conectados a una plataforma de software que guía cada actividad con voz e imagen. ' +
       'Nacieron con el Kit Braille para acompañar la alfabetización de personas con discapacidad visual.',
