@@ -47,7 +47,7 @@ export const SERVICIOS: Servicio[] = [
     id: 'kits-interactivos',
     titulo: 'Plataforma de Kits Interactivos',
     etiqueta: 'Educación inclusiva',
-    imagen: 'assets/imagenes/servicios/kits-interactivos.svg',
+    imagen: 'assets/imagenes/servicios/foto-kits-interactivos.webp',
     resumen:
       'Kits educativos físicos conectados a una plataforma de software que guía cada actividad con voz e imagen. ' +
       'Nacieron con el Kit Braille para acompañar la alfabetización de personas con discapacidad visual.',
@@ -63,7 +63,7 @@ export const SERVICIOS: Servicio[] = [
     id: 'equipos-didacticos',
     titulo: 'Equipos Médicos Didácticos',
     etiqueta: 'Diseño y fabricación',
-    imagen: 'assets/imagenes/servicios/equipos-didacticos.svg',
+    imagen: 'assets/imagenes/servicios/foto-equipos-didacticos.webp',
     resumen:
       'Diseñamos y fabricamos equipos médicos didácticos para que estudiantes de electromedicina e ingeniería biomédica ' +
       'aprendan con equipos funcionales, abiertos y seguros.',
@@ -97,7 +97,7 @@ export const SERVICIOS: Servicio[] = [
     id: 'paginas-web',
     titulo: 'Desarrollo de Páginas Web y Software',
     etiqueta: 'Software a medida',
-    imagen: 'assets/imagenes/servicios/paginas-web.svg',
+    imagen: 'assets/imagenes/servicios/foto-paginas-web.webp',
     resumen:
       'Creamos páginas web, aplicaciones y software a medida: sitios con catálogo que usted mismo administra y ' +
       'sistemas para hospitales, como la gestión del mantenimiento y la metrología de equipos médicos.',
@@ -163,7 +163,7 @@ export const SERVICIOS: Servicio[] = [
     id: 'asesoria-tesis',
     titulo: 'Asesoría de Tesis',
     etiqueta: 'Grado y posgrado',
-    imagen: 'assets/imagenes/servicios/asesoria-tesis.svg',
+    imagen: 'assets/imagenes/servicios/foto-asesoria-tesis.webp',
     resumen:
       'Acompañamiento técnico para trabajos de titulación de grado y posgrado en electrónica y bioingeniería, ' +
       'desde la idea hasta el prototipo funcionando.',
@@ -180,7 +180,7 @@ export const SERVICIOS: Servicio[] = [
     id: 'incubadora',
     titulo: 'Incubadora de Emprendimientos',
     etiqueta: 'Guía para emprendedores',
-    imagen: 'assets/imagenes/servicios/incubadora.svg',
+    imagen: 'assets/imagenes/servicios/foto-incubadora.webp',
     resumen:
       'Compartimos lo que aprendimos al llevar nuestros propios equipos del laboratorio al mercado: ' +
       'una guía paso a paso para convertir una idea en un emprendimiento.',
