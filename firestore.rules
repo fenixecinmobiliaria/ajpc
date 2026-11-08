@@ -1,0 +1,33 @@
+rules_version = '2';
+
+// Reglas de Firestore para jpcelectronics-52996.
+// Lectura pública solo del contenido del sitio; escritura solo del administrador
+// (documento User/{uid} con rol == 'admin'). Todo lo demás queda cerrado.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function esAdmin() {
+      return request.auth != null
+        && get(/databases/$(database)/documents/User/$(request.auth.uid)).data.rol == 'admin';
+    }
+
+    // Cada usuario solo puede leer su propio documento (lo usa checkUserRole).
+    // Nadie puede crear ni cambiar roles desde la web: se hace en la consola.
+    match /User/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    match /Productos/{id} {
+      allow read: if true;
+      allow write: if esAdmin();
+    }
+
+    // Videos por sección (alianzasVideos, designVideos, domoticaVideos,
+    // fabricacionVideos, maintenanceVideos, potenciacionVideos).
+    match /{coleccion}/{id} {
+      allow read: if coleccion.matches('.*Videos');
+      allow write: if coleccion.matches('.*Videos') && esAdmin();
+    }
+  }
+}
