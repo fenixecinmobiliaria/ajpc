@@ -178,8 +178,9 @@ export const LOGROS: Logro[] = [
     titulo: 'Tesis de tracción lumbar en la UDA',
     subtitulo: 'Universidad del Azuay · Ingeniería Electrónica · 2013',
     descripcion:
-      'Dos estudiantes de Ingeniería Electrónica de la Universidad del Azuay desarrollaron con nuestro fundador su tesis ' +
-      'sobre un equipo de tracción lumbar y obtuvieron su título. Ese trabajo es la base de NEXUS, nuestra línea de tracción.',
+      'Sebastián Fernández y Esteban Mora, estudiantes de Ingeniería Electrónica de la Universidad del Azuay, ' +
+      'desarrollaron con nuestro fundador su tesis sobre un equipo de tracción lumbar y obtuvieron su título. ' +
+      'Ese trabajo es la base de NEXUS, nuestra línea de tracción.',
     imagen: 'assets/imagenes/logros/tesis-traccion-lumbar-uda.webp',
     ajuste: 'cover',
     icono: '🎓'
