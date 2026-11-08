@@ -82,15 +82,51 @@
               </div>
               <span class="text-[9px] font-black text-white uppercase tracking-widest text-center">Alianzas</span>
             </a>
+
+            @for (s of servicios; track s.id) {
+              <a [routerLink]="['/servicios', s.id]" [attr.aria-label]="'Sección de ' + s.titulo" class="group flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/20 p-4 rounded-[2rem] hover:bg-white/20 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                <div class="w-16 h-16 rounded-2xl overflow-hidden mb-3 border-2 border-white/10 group-hover:border-white transition-colors">
+                  <img [src]="s.imagen" alt="" width="60" height="60" class="w-full h-full object-cover">
+                </div>
+                <span class="text-[9px] font-black text-white uppercase tracking-widest text-center">{{ s.titulo }}</span>
+              </a>
+            }
           </div>
         </div>
 
         <div class="flex-1 w-full max-w-2xl relative">
-          <div class="relative z-10 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] rounded-[3rem] overflow-hidden border-8 border-white/20 cursor-pointer group" (click)="navigateToCatalogo('Ambulancia')">
-            <img [src]="imagenActual" alt="Unidades Móviles JPC" width="432" height="243" fetchpriority="high" loading="eager" class="w-full h-auto transition-transform duration-1000 group-hover:scale-110" />
-            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-10 mt-12">
-              <h2 class="text-white font-black text-3xl uppercase tracking-tighter">Unidades Móviles</h2>
-              <p class="text-blue-100 text-lg font-medium">Equipamiento de alta complejidad para emergencias.</p>
+          <div class="relative z-10 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] rounded-[3rem] overflow-hidden border-8 border-white/20 group bg-white"
+               (mouseenter)="pausar(true)" (mouseleave)="pausar(false)">
+            <div class="flex transition-transform duration-700 ease-in-out" [style.transform]="'translateX(-' + indiceActual * 100 + '%)'">
+              @for (d of diapositivas; track d.src; let i = $index) {
+                <button type="button" class="relative w-full shrink-0 aspect-video cursor-pointer" (click)="navigateToCatalogo(d.categoria)"
+                        [attr.aria-label]="d.titulo" [attr.aria-hidden]="i !== indiceActual" [tabindex]="i === indiceActual ? 0 : -1">
+                  @if (d.llenar) {
+                    <img [src]="d.src" [alt]="d.titulo" class="absolute inset-0 w-full h-full object-cover"
+                         [attr.loading]="i === 0 ? 'eager' : 'lazy'" [attr.fetchpriority]="i === 0 ? 'high' : null" />
+                  } @else {
+                    <img [src]="d.src" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-60" loading="lazy" />
+                    <img [src]="d.src" [alt]="d.titulo" class="absolute inset-0 w-full h-full object-contain p-6 pb-24" loading="lazy" />
+                  }
+                  <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-10 pb-12 pt-16 text-left">
+                    <h2 class="text-white font-black text-3xl uppercase tracking-tighter">{{ d.titulo }}</h2>
+                    <p class="text-blue-100 text-lg font-medium">{{ d.subtitulo }}</p>
+                  </div>
+                </button>
+              }
+            </div>
+
+            <button type="button" (click)="anterior()" aria-label="Imagen anterior"
+                    class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/70 hover:bg-white text-indigo-900 font-black text-xl shadow opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity">&#8249;</button>
+            <button type="button" (click)="siguiente()" aria-label="Imagen siguiente"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/70 hover:bg-white text-indigo-900 font-black text-xl shadow opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity">&#8250;</button>
+
+            <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-1.5 px-6 flex-wrap">
+              @for (d of diapositivas; track d.src; let i = $index) {
+                <button type="button" (click)="irA(i)" [attr.aria-label]="'Ir a ' + d.titulo"
+                        class="h-2 rounded-full transition-all"
+                        [class]="i === indiceActual ? 'w-6 bg-white' : 'w-2 bg-white/50 hover:bg-white/80'"></button>
+              }
             </div>
           </div>
           <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/20 blur-3xl rounded-full animate-pulse"></div>

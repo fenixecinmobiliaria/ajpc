@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { SERVICIOS } from '../../../app/pages/servicio/servicios.data';
 
 @Component({
   selector: 'app-navbar',
@@ -9,6 +10,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {
+  readonly servicios = SERVICIOS;
   @Input() isLoggedIn = false;
   @Output() onLogin = new EventEmitter<void>();
   @Output() onLogout = new EventEmitter<void>();

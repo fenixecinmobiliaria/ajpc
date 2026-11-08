@@ -9,6 +9,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { DisenoInventorComponent } from './pages/diseno-inventor/diseno-inventor.component';
 import { AlianzasEstrategicasComponent } from './pages/alianzas-estrategicas/alianzas-estrategicas.component';
 import { AuthGuard } from './auth.guard';
+import { ServicioComponent } from './pages/servicio/servicio.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -21,5 +22,6 @@ export const routes: Routes = [
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'diseno-inventor', component: DisenoInventorComponent },
   { path: 'alianzas-estrategicas', component: AlianzasEstrategicasComponent },
+  { path: 'servicios/:id', component: ServicioComponent },
   { path: '**', redirectTo: 'home' }
 ];

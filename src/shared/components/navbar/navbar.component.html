@@ -38,7 +38,10 @@
           <li><a routerLink="diseno-inventor" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()" class="font-bold text-slate-600 py-3 mb-1">⚙️ Diseño Inventor</a></li>
           <li><a routerLink="fabricacion" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()" class="font-bold text-slate-600 py-3 mb-1">🏭 Fabricación</a></li>
           <li><a routerLink="alianzas-estrategicas" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()" class="font-bold text-slate-600 py-3 mb-1">🤝 Alianzas Estratégicas</a></li>
-          <li><a routerLink="domotica" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()" class="font-bold text-slate-600 py-3">🏠 Domótica</a></li>
+          <li><a routerLink="domotica" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()" class="font-bold text-slate-600 py-3 mb-1">🏠 Domótica</a></li>
+          @for (sv of servicios; track sv.id) {
+            <li><a [routerLink]="['/servicios', sv.id]" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()" class="font-bold text-slate-600 py-3 mb-1">{{ sv.titulo }}</a></li>
+          }
         </ul>
       </div>
     </div>
@@ -67,6 +70,9 @@
                 <li><a routerLink="fabricacion" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()">Fabricación</a></li>
                 <li><a routerLink="alianzas-estrategicas" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()">Alianzas Estratégicas</a></li>
                 <li><a routerLink="domotica" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()">Domótica</a></li>
+                @for (sv of servicios; track sv.id) {
+                  <li><a [routerLink]="['/servicios', sv.id]" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()">{{ sv.titulo }}</a></li>
+                }
               </ul>
             </details>
           </li>
