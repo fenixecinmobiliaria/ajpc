@@ -59,6 +59,18 @@ export const LOGROS: Logro[] = [
     ajuste: 'contain'
   },
   {
+    id: 'maestria-ingenieria-biomedica-ups',
+    anio: 2026,
+    periodo: '2025 – 2026',
+    tipo: 'Formación',
+    titulo: 'Maestría en Ingeniería Biomédica',
+    subtitulo: 'Universidad Politécnica Salesiana · Cuenca',
+    descripcion:
+      'Nuestro fundador aprobó con éxito todos los módulos de la maestría en Ingeniería Biomédica (bioingeniería) ' +
+      'y está en la etapa final de su trabajo de titulación.',
+    icono: '🧬'
+  },
+  {
     id: 'ingeniatec-2016',
     anio: 2016,
     tipo: 'Reconocimiento',
@@ -96,6 +108,32 @@ export const LOGROS: Logro[] = [
     // Foto del campus con el logo de la UDA solo como identificación del lugar (no implica alianza con JPC).
     imagen: 'assets/imagenes/logros/universidad-del-azuay.webp',
     ajuste: 'cover',
+    icono: '🎓',
+    enlace: { texto: 'Ver el título de Ingeniero Electrónico', url: 'assets/imagenes/logros/titulo-ingeniero-electronico-uda-2003.webp' }
+  },
+  {
+    id: 'upm-especialista-2004',
+    anio: 2004,
+    tipo: 'Formación',
+    titulo: 'Especialista en Ingeniería de Sistemas Internet y Móviles',
+    subtitulo: 'Universidad Politécnica de Madrid · España · 2004',
+    descripcion:
+      'Título de especialización de posgrado (18,5 créditos) de la Universidad Politécnica de Madrid, ' +
+      'que sumó formación internacional en sistemas de internet y comunicaciones móviles.',
+    imagen: 'assets/imagenes/logros/titulo-especialista-upm-2004.webp',
+    ajuste: 'contain',
+    icono: '🎓'
+  },
+  {
+    id: 'uda-tecnologo-1998',
+    anio: 1998,
+    tipo: 'Formación',
+    titulo: 'Tecnólogo Industrial en Electrónica',
+    subtitulo: 'Universidad del Azuay · 1998',
+    descripcion:
+      'Primer título de nuestro fundador en electrónica: el inicio de su formación técnica en la Universidad del Azuay.',
+    imagen: 'assets/imagenes/logros/titulo-tecnologo-electronica-uda-1998.webp',
+    ajuste: 'contain',
     icono: '🎓'
   }
 ];
