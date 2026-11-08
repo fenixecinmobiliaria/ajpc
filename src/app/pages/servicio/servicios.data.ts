@@ -12,6 +12,8 @@ export interface Servicio {
   puntos: { icono: string; titulo: string; texto: string }[];
   dirigidoA: string[];
   nota?: string;
+  /** Video vertical (reel) con su portada y una leyenda corta. */
+  video?: { src: string; portada: string; titulo: string; leyenda: string };
   mensajeWhatsApp: string;
 }
 
@@ -48,6 +50,13 @@ export const SERVICIOS: Servicio[] = [
       { icono: '📘', titulo: 'Con prácticas', texto: 'Entregamos guías de práctica y capacitación al personal docente.' }
     ],
     dirigidoA: ['Universidades', 'Institutos tecnológicos', 'Centros de capacitación'],
+    video: {
+      src: 'assets/videos/electrobisturi-didactico.mp4',
+      portada: 'assets/imagenes/servicios/electrobisturi-didactico-portada.webp',
+      titulo: 'Electrobisturí didáctico monopolar · en desarrollo',
+      leyenda: 'Cuatro modos de operación, osciloscopio integrado, puntos de prueba en cada placa y alarma REM, ' +
+        'pensado para aprender electrocirugía midiendo. Uso exclusivo de laboratorio y docencia.'
+    },
     mensajeWhatsApp: 'Hola JPC Electronics, quiero información sobre equipos médicos didácticos.'
   },
   {
