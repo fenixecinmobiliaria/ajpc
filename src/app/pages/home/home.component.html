@@ -6,7 +6,7 @@
        srcset="assets/imagenes/banner-jpc-960.webp 960w, assets/imagenes/banner-jpc.webp 1920w"
        sizes="100vw" width="1920" height="731" fetchpriority="high" loading="eager"
        alt="JPC Electronics · Tecnología · Innovación · Confianza"
-       class="block w-full h-auto bg-[#0A1630]" />
+       class="block w-full h-auto max-h-[300px] object-contain object-center bg-gradient-to-r from-[#12284A] to-[#1A416E]" />
 
   <section class="relative bg-gradient-to-br from-[#0A1630] via-[#0b2a6b] to-[#0057D9] py-16 lg:py-20 overflow-hidden">
     <div class="absolute top-0 left-0 right-0 flex h-1.5" aria-hidden="true"><div class="flex-1 bg-[#FFDD00]"></div><div class="flex-1 bg-[#0057D9]"></div><div class="flex-1 bg-[#D7141A]"></div></div>
@@ -18,58 +18,7 @@
             <span class="block mt-2 text-base text-[#A9B6D3]">Más de 13 años de trayectoria · Hecho en Cuenca, Ecuador</span>
           </p>
 
-          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 pt-6">
-            <a routerLink="/mantenimiento" aria-label="Sección de Mantenimiento" class="group flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/20 p-4 rounded-[2rem] hover:bg-white/20 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-              <div class="w-16 h-16 rounded-2xl overflow-hidden mb-3 border-2 border-white/20 group-hover:border-white transition-colors">
-                <img src="assets/imagenes/mantenimiento.webp" alt="" width="60" height="60" class="w-full h-full object-cover">
-              </div>
-              <span class="text-[9px] font-black text-white uppercase tracking-widest text-center">Mantenimiento</span>
-            </a>
 
-            <a routerLink="/repotenciacion" aria-label="Sección de Repotenciación" class="group flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/20 p-4 rounded-[2rem] hover:bg-white/20 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-              <div class="w-16 h-16 rounded-2xl overflow-hidden mb-3 border-2 border-white/20 group-hover:border-white transition-colors">
-                <img src="assets/imagenes/repotenciacion.webp" alt="" width="60" height="60" class="w-full h-full object-cover">
-              </div>
-              <span class="text-[9px] font-black text-white uppercase tracking-widest text-center">Repotenciación</span>
-            </a>
-
-            <a routerLink="/fabricacion" aria-label="Sección de Fabricación" class="group flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/20 p-4 rounded-[2rem] hover:bg-white/20 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-              <div class="w-16 h-16 rounded-2xl overflow-hidden mb-3 border-2 border-white/20 group-hover:border-white transition-colors">
-                <img src="assets/imagenes/fabricacion.webp" alt="" width="60" height="60" class="w-full h-full object-cover">
-              </div>
-              <span class="text-[9px] font-black text-white uppercase tracking-widest text-center">Fabricación</span>
-            </a>
-
-            <a routerLink="/diseno-inventor" aria-label="Sección de Diseño Inventor" class="group flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/20 p-4 rounded-[2rem] hover:bg-white/20 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-              <div class="w-16 h-16 rounded-2xl overflow-hidden mb-3 border-2 border-white/20 group-hover:border-white transition-colors">
-                <img src="assets/imagenes/inventor.webp" alt="" width="60" height="60" class="w-full h-full object-cover">
-              </div>
-              <span class="text-[9px] font-black text-white uppercase tracking-widest text-center">Diseño Inventor</span>
-            </a>
-
-            <a routerLink="/domotica" aria-label="Sección de Domótica" class="group flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/20 p-4 rounded-[2rem] hover:bg-white/20 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-              <div class="w-16 h-16 rounded-2xl overflow-hidden mb-3 border-2 border-white/10 group-hover:border-white transition-colors">
-                <img src="assets/imagenes/domo.webp" alt="" width="60" height="60" class="w-full h-full object-cover">
-              </div>
-              <span class="text-[9px] font-black text-white uppercase tracking-widest text-center">Domótica</span>
-            </a>
-
-            <a routerLink="/alianzas-estrategicas" aria-label="Sección de Alianzas Estratégicas" class="group flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/20 p-4 rounded-[2rem] hover:bg-white/20 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-              <div class="w-16 h-16 rounded-2xl overflow-hidden mb-3 border-2 border-white/10 group-hover:border-white transition-colors">
-                <img src="assets/imagenes/alianzas.jpeg" alt="" width="60" height="60" class="w-full h-full object-cover">
-              </div>
-              <span class="text-[9px] font-black text-white uppercase tracking-widest text-center">Alianzas</span>
-            </a>
-
-            @for (s of servicios; track s.id) {
-              <a [routerLink]="['/servicios', s.id]" [attr.aria-label]="'Sección de ' + s.titulo" class="group flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/20 p-4 rounded-[2rem] hover:bg-white/20 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-                <div class="w-16 h-16 rounded-2xl overflow-hidden mb-3 border-2 border-white/10 group-hover:border-white transition-colors">
-                  <img [src]="s.imagen" alt="" width="60" height="60" class="w-full h-full object-cover">
-                </div>
-                <span class="text-[9px] font-black text-white uppercase tracking-widest text-center">{{ s.titulo }}</span>
-              </a>
-            }
-          </div>
         </div>
 
         <div class="flex-1 w-full max-w-2xl relative">
@@ -109,6 +58,62 @@
           </div>
           <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/20 blur-3xl rounded-full animate-pulse"></div>
         </div>
+      </div>
+
+      <!-- Todas las ventanas: íconos grandes a todo el ancho -->
+      <div class="mt-14">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 lg:gap-5">
+              <a routerLink="/mantenimiento" aria-label="Sección de Mantenimiento" class="group flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/20 p-5 rounded-[2rem] h-full hover:bg-white/20 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                <div class="w-24 h-24 rounded-2xl overflow-hidden mb-3 border-2 border-white/20 group-hover:border-white transition-colors">
+                  <img src="assets/imagenes/mantenimiento.webp" alt="" width="96" height="96" class="w-full h-full object-cover">
+                </div>
+                <span class="text-xs font-black leading-tight text-white uppercase tracking-widest text-center">Mantenimiento</span>
+              </a>
+  
+              <a routerLink="/repotenciacion" aria-label="Sección de Repotenciación" class="group flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/20 p-5 rounded-[2rem] h-full hover:bg-white/20 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                <div class="w-24 h-24 rounded-2xl overflow-hidden mb-3 border-2 border-white/20 group-hover:border-white transition-colors">
+                  <img src="assets/imagenes/repotenciacion.webp" alt="" width="96" height="96" class="w-full h-full object-cover">
+                </div>
+                <span class="text-xs font-black leading-tight text-white uppercase tracking-widest text-center">Repotenciación</span>
+              </a>
+  
+              <a routerLink="/fabricacion" aria-label="Sección de Fabricación" class="group flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/20 p-5 rounded-[2rem] h-full hover:bg-white/20 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                <div class="w-24 h-24 rounded-2xl overflow-hidden mb-3 border-2 border-white/20 group-hover:border-white transition-colors">
+                  <img src="assets/imagenes/fabricacion.webp" alt="" width="96" height="96" class="w-full h-full object-cover">
+                </div>
+                <span class="text-xs font-black leading-tight text-white uppercase tracking-widest text-center">Fabricación</span>
+              </a>
+  
+              <a routerLink="/diseno-inventor" aria-label="Sección de Diseño Inventor" class="group flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/20 p-5 rounded-[2rem] h-full hover:bg-white/20 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                <div class="w-24 h-24 rounded-2xl overflow-hidden mb-3 border-2 border-white/20 group-hover:border-white transition-colors">
+                  <img src="assets/imagenes/inventor.webp" alt="" width="96" height="96" class="w-full h-full object-cover">
+                </div>
+                <span class="text-xs font-black leading-tight text-white uppercase tracking-widest text-center">Diseño Inventor</span>
+              </a>
+  
+              <a routerLink="/domotica" aria-label="Sección de Domótica" class="group flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/20 p-5 rounded-[2rem] h-full hover:bg-white/20 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                <div class="w-24 h-24 rounded-2xl overflow-hidden mb-3 border-2 border-white/10 group-hover:border-white transition-colors">
+                  <img src="assets/imagenes/domo.webp" alt="" width="96" height="96" class="w-full h-full object-cover">
+                </div>
+                <span class="text-xs font-black leading-tight text-white uppercase tracking-widest text-center">Domótica</span>
+              </a>
+  
+              <a routerLink="/alianzas-estrategicas" aria-label="Sección de Alianzas Estratégicas" class="group flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/20 p-5 rounded-[2rem] h-full hover:bg-white/20 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                <div class="w-24 h-24 rounded-2xl overflow-hidden mb-3 border-2 border-white/10 group-hover:border-white transition-colors">
+                  <img src="assets/imagenes/alianzas.jpeg" alt="" width="96" height="96" class="w-full h-full object-cover">
+                </div>
+                <span class="text-xs font-black leading-tight text-white uppercase tracking-widest text-center">Alianzas</span>
+              </a>
+  
+              @for (s of servicios; track s.id) {
+                <a [routerLink]="['/servicios', s.id]" [attr.aria-label]="'Sección de ' + s.titulo" class="group flex flex-col items-center bg-white/10 backdrop-blur-sm border border-white/20 p-5 rounded-[2rem] h-full hover:bg-white/20 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                  <div class="w-24 h-24 rounded-2xl overflow-hidden mb-3 border-2 border-white/10 group-hover:border-white transition-colors">
+                    <img [src]="s.imagen" alt="" width="96" height="96" class="w-full h-full object-cover">
+                  </div>
+                  <span class="text-xs font-black leading-tight text-white uppercase tracking-widest text-center">{{ s.titulo }}</span>
+                </a>
+              }
+            </div>
       </div>
     </div>
   </section>
