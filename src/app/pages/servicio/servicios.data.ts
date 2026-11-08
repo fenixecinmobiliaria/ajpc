@@ -13,8 +13,20 @@ export interface Servicio {
   dirigidoA: string[];
   nota?: string;
   /** Video vertical (reel) con su portada, párrafos de descripción y un texto destacado. */
-  video?: { src: string; portada: string; titulo: string; parrafos: string[]; destacado?: string };
+  videos?: VideoServicio[];
   mensajeWhatsApp: string;
+}
+
+export interface VideoServicio {
+  src: string;
+  portada: string;
+  titulo: string;
+  parrafos: string[];
+  destacado?: string;
+  /** true para reels 9:16; si no, el video es horizontal y ocupa todo el ancho. */
+  vertical?: boolean;
+  /** Etiqueta sobre el video; por defecto «Demostración en video». */
+  etiqueta?: string;
 }
 
 export const WHATSAPP_JPC = '593980929669';
@@ -50,7 +62,9 @@ export const SERVICIOS: Servicio[] = [
       { icono: '📘', titulo: 'Con prácticas', texto: 'Entregamos guías de práctica y capacitación al personal docente.' }
     ],
     dirigidoA: ['Universidades', 'Institutos tecnológicos', 'Centros de capacitación'],
-    video: {
+    videos: [{
+      vertical: true,
+      etiqueta: 'Prototipo en video',
       src: 'assets/videos/electrobisturi-didactico.mp4',
       portada: 'assets/imagenes/servicios/electrobisturi-didactico-portada.webp',
       titulo: 'Electrobisturí didáctico monopolar · en desarrollo',
@@ -65,24 +79,56 @@ export const SERVICIOS: Servicio[] = [
       ],
       destacado: 'Equipo de uso exclusivo para laboratorio y docencia, no para pacientes. ¿Eres docente o coordinas ' +
         'una carrera de Ingeniería Biomédica o Electrónica? Escríbenos y conversemos.'
-    },
+    }],
     mensajeWhatsApp: 'Hola JPC Electronics, quiero información sobre equipos médicos didácticos.'
   },
   {
     id: 'paginas-web',
-    titulo: 'Desarrollo de Páginas Web',
+    titulo: 'Desarrollo de Páginas Web y Software',
     etiqueta: 'Software a medida',
     imagen: 'assets/imagenes/servicios/paginas-web.svg',
     resumen:
-      'Creamos páginas web y aplicaciones para negocios: sitios con catálogo que usted mismo administra, ' +
-      'adaptados al celular y listos para recibir clientes por WhatsApp.',
+      'Creamos páginas web, aplicaciones y software a medida: sitios con catálogo que usted mismo administra y ' +
+      'sistemas para hospitales, como la gestión del mantenimiento y la metrología de equipos médicos.',
     puntos: [
       { icono: '🛒', titulo: 'Catálogo administrable', texto: 'Suba productos, fotos y precios desde un panel, sin programar.' },
       { icono: '📱', titulo: 'Pensada para celular', texto: 'La mayoría de sus clientes la verá desde el teléfono.' },
       { icono: '🌐', titulo: 'Dominio y publicación', texto: 'Le guiamos para tener su propio dominio y mantener el sitio en línea.' }
     ],
     dirigidoA: ['Pequeñas y medianas empresas', 'Profesionales independientes', 'Emprendimientos'],
-    mensajeWhatsApp: 'Hola JPC Electronics, quiero información sobre el desarrollo de una página web.'
+    videos: [
+      {
+        src: 'assets/videos/software-mantenimiento.mp4',
+        portada: 'assets/imagenes/servicios/software-mantenimiento-portada.jpg',
+        titulo: 'Software de gestión de mantenimiento de equipos médicos',
+        parrafos: [
+          'Sistema web para departamentos de Ingeniería Clínica: inventario de equipos por áreas, solicitudes de ' +
+            'mantenimiento, órdenes de trabajo, cronograma de preventivos, indicadores y calidad y seguridad.',
+          'Lo desarrollamos a partir de la experiencia de nuestro fundador en la gestión de equipos médicos hospitalarios.'
+        ]
+      },
+      {
+        vertical: true,
+        src: 'assets/videos/software-mantenimiento-empresas.mp4',
+        portada: 'assets/imagenes/servicios/software-mantenimiento-empresas-portada.jpg',
+        titulo: 'Software de mantenimiento preventivo para empresas de servicio',
+        parrafos: [
+          'Pensado para empresas privadas que dan mantenimiento a equipos médicos: código QR por equipo, reporte de ' +
+            'fallas, inventario e historial, planificación de preventivos, indicadores de gestión, priorización con ' +
+            'AHP e informes en PDF.'
+        ]
+      },
+      {
+        src: 'assets/videos/software-metrologia.mp4',
+        portada: 'assets/imagenes/servicios/software-metrologia-portada.jpg',
+        titulo: 'Software de metrología y calibración',
+        parrafos: [
+          'Gestiona calibraciones de equipos médicos paso a paso: equipos patrón, toma de lecturas, cálculo de la ' +
+            'incertidumbre e informe en PDF, además de intervalos de calibración, riesgos y auditorías.'
+        ]
+      }
+    ],
+    mensajeWhatsApp: 'Hola JPC Electronics, quiero información sobre el desarrollo de una página web o un software.'
   },
   {
     id: 'asesoria-tesis',

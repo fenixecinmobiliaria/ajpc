@@ -24,14 +24,15 @@
       }
     </section>
 
-    @if (s.video; as v) {
-      <section class="max-w-xl mx-auto px-4 mt-16">
+    @for (v of s.videos ?? []; track v.src) {
+      <section class="mx-auto px-4 mt-16" [ngClass]="v.vertical ? 'max-w-xl' : 'max-w-5xl'">
         <article class="bg-white rounded-3xl shadow-xl overflow-hidden">
           <div class="bg-[#0A1630] relative">
             <video [src]="v.src" [poster]="v.portada" controls playsinline preload="none"
-                   class="block w-full aspect-[9/16] max-h-[85vh] object-contain bg-black mx-auto"
+                   class="block w-full bg-black mx-auto"
+                   [ngClass]="v.vertical ? 'aspect-[9/16] max-h-[85vh] object-contain' : 'aspect-video object-contain'"
                    [attr.aria-label]="'Video: ' + v.titulo"></video>
-            <span class="absolute top-4 left-4 bg-[#0A1630]/85 text-[#FFDD00] text-[11px] font-black uppercase tracking-widest px-3 py-1 rounded-full pointer-events-none">Prototipo en video</span>
+            <span class="absolute top-4 left-4 bg-[#0A1630]/85 text-[#FFDD00] text-[11px] font-black uppercase tracking-widest px-3 py-1 rounded-full pointer-events-none">{{ v.etiqueta || 'Demostración en video' }}</span>
           </div>
           <div class="p-7">
             <div class="w-12 h-1 bg-[#FFDD00] rounded mb-3" aria-hidden="true"></div>
