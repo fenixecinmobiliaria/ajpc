@@ -11,7 +11,8 @@ export interface Servicio {
   /** Captura ancha que se muestra completa arriba de la página (en lugar del ícono cuadrado). */
   captura?: string;
   resumen: string;
-  puntos: { icono: string; titulo: string; texto: string }[];
+  /** Tarjetas destacadas; con «imagen» muestran una captura arriba. */
+  puntos: { icono: string; titulo: string; texto: string; imagen?: string }[];
   dirigidoA: string[];
   nota?: string;
   /** Video vertical (reel) con su portada, párrafos de descripción y un texto destacado. */
@@ -55,7 +56,12 @@ export const SERVICIOS: Servicio[] = [
       'Kits educativos físicos conectados a una plataforma de software que guía cada actividad con voz e imagen. ' +
       'Nacieron con el Kit Braille para acompañar la alfabetización de personas con discapacidad visual.',
     puntos: [
-      { icono: '⠿', titulo: 'Kit Braille', texto: 'Fichas y regleta para aprender y practicar la lectura braille paso a paso.' },
+      { icono: '⠿', titulo: 'Kit Braille', imagen: 'assets/imagenes/servicios/kit-braille.webp',
+        texto: 'Con fichas y regleta táctiles la persona forma palabras; la plataforma lee el tablero, guía por voz y registra aciertos y tiempo.' },
+      { icono: '🧩', titulo: 'Kit AutiSense', imagen: 'assets/imagenes/servicios/kit-autisense.webp',
+        texto: 'Comunicación con pictogramas y voz para personas con autismo: expresar ayuda, dolor, miedo o cansancio con un solo toque.' },
+      { icono: '🤟', titulo: 'Kit SignPlay', imagen: 'assets/imagenes/servicios/kit-signplay.webp',
+        texto: 'Para aprender la Lengua de Señas Ecuatoriana: la cámara sigue la mano mientras se practica cada seña del abecedario.' },
       { icono: '🔊', titulo: 'Guía por voz', texto: 'La plataforma indica cada ejercicio y confirma el avance de la persona.' },
       { icono: '🤝', titulo: 'Para quien acompaña', texto: 'Docentes y familiares pueden seguir la actividad aunque no lean braille.' }
     ],

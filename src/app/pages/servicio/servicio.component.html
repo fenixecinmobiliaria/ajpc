@@ -22,12 +22,21 @@
       }
     </section>
 
-    <section class="max-w-6xl mx-auto px-4 -mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+    <section class="max-w-6xl mx-auto px-4 -mt-16 flex flex-wrap justify-center gap-6 relative z-20">
       @for (p of s.puntos; track p.titulo) {
-        <div class="bg-white rounded-3xl shadow-xl p-8 text-center hover:-translate-y-1 transition-transform">
-          <div class="text-4xl mb-3" aria-hidden="true">{{ p.icono }}</div>
-          <h2 class="font-black text-indigo-900 text-lg mb-2">{{ p.titulo }}</h2>
-          <p class="text-sm text-slate-600 leading-relaxed">{{ p.texto }}</p>
+        <div class="bg-white rounded-3xl shadow-xl overflow-hidden text-center hover:-translate-y-1 transition-transform flex flex-col w-full md:w-[calc(33.333%-1rem)]">
+          @if (p.imagen) {
+            <div class="aspect-[16/9] bg-[#0A1630]">
+              <img [src]="p.imagen" [alt]="'Captura del ' + p.titulo" loading="lazy" class="w-full h-full object-contain" />
+            </div>
+          }
+          <div class="p-8">
+            @if (!p.imagen) {
+              <div class="text-4xl mb-3" aria-hidden="true">{{ p.icono }}</div>
+            }
+            <h2 class="font-black text-indigo-900 text-lg mb-2">{{ p.titulo }}</h2>
+            <p class="text-sm text-slate-600 leading-relaxed">{{ p.texto }}</p>
+          </div>
         </div>
       }
     </section>
