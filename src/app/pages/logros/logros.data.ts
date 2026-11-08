@@ -13,7 +13,7 @@
  */
 export type TipoLogro =
   | 'Reconocimiento' | 'Selección nacional' | 'Incubación' | 'Alianza' | 'Evento' | 'Medios'
-  | 'Formación' | 'Trayectoria profesional';
+  | 'Formación' | 'Trayectoria profesional' | 'Formación de talento';
 
 export interface Logro {
   id: string;
@@ -89,6 +89,34 @@ export const LOGROS: Logro[] = [
     icono: '🧬'
   },
   {
+    id: 'hackathon-ups-2025',
+    anio: 2025,
+    tipo: 'Evento',
+    titulo: 'Invitado especial · Hackathon UPS 2025',
+    subtitulo: 'Hackathon de Innovación Biomédica y Salud Digital · Universidad Politécnica Salesiana, Cuenca',
+    descripcion:
+      'Nuestro fundador participó como invitado especial del Hackathon de Innovación Biomédica y Salud Digital 2025 ' +
+      'para compartir con los estudiantes su experiencia en el desarrollo de equipos médicos y en la conexión entre la academia y la industria.',
+    imagen: 'assets/imagenes/logros/hackathon-ups-2025.webp',
+    ajuste: 'contain',
+    icono: '🎤'
+  },
+  {
+    id: 'practicantes-jpc',
+    anio: 2024,
+    periodo: 'Desde 2024',
+    tipo: 'Formación de talento',
+    titulo: 'Más de 20 practicantes en nuestro laboratorio',
+    subtitulo: 'Universidad Politécnica Salesiana y Universidad del Azuay',
+    descripcion:
+      'Ya son más de 20 los estudiantes que han hecho sus prácticas o su tesis con nosotros, de distintas carreras: ' +
+      'biomedicina, ingeniería electrónica, mecatrónica, computación y diseño gráfico. Trabajan en proyectos reales ' +
+      'de equipos médicos y software junto a nuestro equipo.',
+    imagen: 'assets/imagenes/logros/practicantes-laboratorio-jpc.webp',
+    ajuste: 'cover',
+    icono: '👩‍🔬'
+  },
+  {
     id: 'ingeniatec-2016',
     anio: 2016,
     tipo: 'Reconocimiento',
@@ -128,6 +156,19 @@ export const LOGROS: Logro[] = [
     ajuste: 'cover',
     icono: '🎓',
     enlace: { texto: 'Ver el título de Ingeniero Electrónico', url: 'assets/imagenes/logros/titulo-ingeniero-electronico-uda-2003.webp' }
+  },
+  {
+    id: 'tesis-traccion-lumbar-uda-2013',
+    anio: 2013,
+    tipo: 'Formación de talento',
+    titulo: 'Tesis de tracción lumbar en la UDA',
+    subtitulo: 'Universidad del Azuay · Ingeniería Electrónica · 2013',
+    descripcion:
+      'Dos estudiantes de Ingeniería Electrónica de la Universidad del Azuay desarrollaron con nuestro fundador su tesis ' +
+      'sobre un equipo de tracción lumbar y obtuvieron su título. Ese trabajo es la base de NEXUS, nuestra línea de tracción.',
+    imagen: 'assets/imagenes/logros/tesis-traccion-lumbar-uda.webp',
+    ajuste: 'cover',
+    icono: '🎓'
   },
   {
     id: 'upm-especialista-2004',
