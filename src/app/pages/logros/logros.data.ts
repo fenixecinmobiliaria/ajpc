@@ -80,6 +80,8 @@ export const LOGROS: Logro[] = [
     descripcion:
       'El Ing. Patricio Campozano fue el primer ingeniero biomédico contratado por el Hospital José Carrasco Arteaga ' +
       'del IESS, hospital de tercer nivel de especialidades en Cuenca, y dejó fundado su Departamento de Ingeniería Clínica.',
+    imagen: 'assets/imagenes/logros/hospital-jose-carrasco-arteaga.webp',
+    ajuste: 'cover',
     icono: '🏥'
   },
   {
