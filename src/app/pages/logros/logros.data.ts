@@ -93,6 +93,9 @@ export const LOGROS: Logro[] = [
     descripcion:
       'Nuestro fundador forma parte de la primera promoción de Ingenieros Electrónicos graduados en la ' +
       'Universidad del Azuay, en Cuenca.',
+    // Foto del campus con el logo de la UDA solo como identificación del lugar (no implica alianza con JPC).
+    imagen: 'assets/imagenes/logros/universidad-del-azuay.webp',
+    ajuste: 'cover',
     icono: '🎓'
   }
 ];
