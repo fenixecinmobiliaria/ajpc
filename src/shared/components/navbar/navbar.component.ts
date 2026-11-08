@@ -59,6 +59,7 @@ export class NavbarComponent {
       id: 'catalogo', texto: 'Catálogo', ruta: '/catalogo', ancho: 'w-64',
       opciones: [
         { texto: '🌐 Ver todo', ruta: '/catalogo' },
+        { texto: '💡 Prototipos JPC', ruta: '/catalogo', queryParams: { category: 'Prototipo JPC' } },
         { texto: '🚑 Ambulancias', ruta: '/catalogo', queryParams: { category: 'Ambulancia' } },
         { texto: '🩺 Equipo Médico', ruta: '/catalogo', queryParams: { category: 'Equipo Medico' } },
         { texto: '📦 Utilería Médica', ruta: '/catalogo', queryParams: { category: 'Utileria Medica' } },

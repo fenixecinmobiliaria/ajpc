@@ -37,6 +37,7 @@
         <label class="label font-black text-[11px] uppercase text-slate-400 tracking-[0.2em] mb-1">Especialidades</label>
         <ul class="menu bg-white border border-slate-200 rounded-[2rem] p-3 shadow-xl space-y-1">
           <li><a (click)="filtrarPorCategoria('')" [class.bg-blue-600]="selectedCategory === ''" [class.text-white]="selectedCategory === ''" class="font-bold py-3 hover:bg-slate-50 transition-all rounded-xl">🌐 Ver Todo</a></li>
+          <li><a (click)="filtrarPorCategoria('Prototipo JPC')" [class.bg-blue-600]="selectedCategory === 'Prototipo JPC'" [class.text-white]="selectedCategory === 'Prototipo JPC'" class="font-bold py-3 hover:bg-slate-50 transition-all rounded-xl">💡 Prototipos JPC</a></li>
           <li><a (click)="filtrarPorCategoria('Ambulancia')" [class.bg-blue-600]="selectedCategory === 'Ambulancia'" [class.text-white]="selectedCategory === 'Ambulancia'" class="font-bold py-3 hover:bg-slate-50 transition-all rounded-xl">🚑 Ambulancias</a></li>
           <li><a (click)="filtrarPorCategoria('Equipo Medico')" [class.bg-blue-600]="selectedCategory === 'Equipo Medico'" [class.text-white]="selectedCategory === 'Equipo Medico'" class="font-bold py-3 hover:bg-slate-50 transition-all rounded-xl">🩺 Equipo Médico</a></li>
           <li><a (click)="filtrarPorCategoria('Utileria Medica')" [class.bg-blue-600]="selectedCategory === 'Utileria Medica'" [class.text-white]="selectedCategory === 'Utileria Medica'" class="font-bold py-3 hover:bg-slate-50 transition-all rounded-xl">📦 Utilería Médica</a></li>
@@ -74,7 +75,7 @@
                      class="absolute inset-0 w-full h-full object-contain transition-opacity duration-300" />
               </ng-container>
               <ng-template #singleImgCat>
-                <img [src]="product.foto || 'assets/logo.webp'" [alt]="product.nombre" class="w-full h-full object-contain" />
+                <img [src]="product.foto || 'assets/logo.webp'" [alt]="product.nombre" class="w-full h-full rounded-2xl" [ngClass]="product.esPrototipo ? 'object-cover' : 'object-contain'" />
               </ng-template>
             </div>
 
@@ -107,9 +108,9 @@
             </div>
 
             <div class="flex items-center justify-between mt-6 pt-6 border-t border-slate-100">
-              <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Estado: Operativo</span>
+              <span class="text-[9px] font-black uppercase tracking-widest" [ngClass]="product.esPrototipo ? 'text-[#0057D9]' : 'text-slate-400'">{{ product.esPrototipo ? 'Prototipo funcional' : 'Estado: Operativo' }}</span>
               <span class="btn btn-ghost btn-xs font-black text-primary uppercase tracking-widest p-0 hover:bg-transparent">
-                Ficha <span class="ml-1">→</span>
+                {{ product.esPrototipo ? 'Ver prototipo' : 'Ficha' }} <span class="ml-1">→</span>
               </span>
             </div>
           </div>

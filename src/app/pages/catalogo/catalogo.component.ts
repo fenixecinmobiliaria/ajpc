@@ -4,6 +4,22 @@ import { Producto } from '../../../models/producto';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductoService } from '../../services/producto.service';
+import { PROTOTIPOS } from '../prototipos/prototipos.data';
+
+/** Categoría con la que los prototipos aparecen en el catálogo. */
+export const CATEGORIA_PROTOTIPOS = 'Prototipo JPC';
+
+/** Los 9 prototipos (ventana Prototipos) como tarjetas del catálogo; sin precios ni «disponible». */
+const PROTOTIPOS_CATALOGO = PROTOTIPOS.map(p => ({
+  id: 'proto-' + p.id,
+  protoId: p.id,
+  esPrototipo: true,
+  nombre: p.nombre,
+  descripcion: p.resumen,
+  categoria: CATEGORIA_PROTOTIPOS,
+  tipo: p.categoria,
+  foto: p.imagen
+}));
 
 @Component({
   selector: 'app-catalogo',
@@ -24,6 +40,7 @@ export class CatalogoComponent implements OnInit {
   indicesImagenes: { [key: number]: number } = {};
 
   private ordenCategorias: { [key: string]: number } = {
+    'Prototipo JPC': 0.5,
     'Ambulancia': 1,
     'Mobilirio Medico': 2,
     'Equipo Medico': 3,
@@ -35,7 +52,7 @@ export class CatalogoComponent implements OnInit {
   ngOnInit(): void {
     this.productoService.getProducto().subscribe({
       next: (products: Producto[]) => {
-        this.allProducts = products;
+        this.allProducts = [...products, ...PROTOTIPOS_CATALOGO];
         this.route.queryParams.subscribe(params => {
           this.selectedCategory = params['category'] || '';
           this.applyFilters();
@@ -58,8 +75,11 @@ export class CatalogoComponent implements OnInit {
     }
 
     if (this.selectedCategory !== '') {
+      const cat = this.selectedCategory.toLowerCase();
       products = products.filter(p =>
-        p.categoria.toLowerCase() === this.selectedCategory.toLowerCase()
+        p.categoria.toLowerCase() === cat ||
+        // Los prototipos también aparecen en «Equipo Médico».
+        (p.esPrototipo && cat === 'equipo medico')
       );
     }
 
@@ -83,6 +103,10 @@ export class CatalogoComponent implements OnInit {
   }
 
   selectProduct(product: any): void {
+    if (product.esPrototipo) {
+      this.router.navigate(['/prototipos'], { fragment: product.protoId });
+      return;
+    }
     this.selectedProduct = product;
   }
 
