@@ -35,7 +35,12 @@
           <div class="p-8 text-white">
             <span class="text-[11px] font-black uppercase tracking-widest text-[#FFDD00]">Prototipo en video</span>
             <h2 class="text-2xl md:text-3xl font-black mt-2">{{ v.titulo }}</h2>
-            <p class="mt-3 text-[#F2F5FB]/90 leading-relaxed">{{ v.leyenda }}</p>
+            @for (par of v.parrafos; track $index) {
+              <p class="mt-3 text-[#F2F5FB]/90 leading-relaxed">{{ par }}</p>
+            }
+            @if (v.destacado) {
+              <p class="mt-5 border-l-4 border-[#FFDD00] pl-4 text-[#FFDD00] font-semibold leading-relaxed">{{ v.destacado }}</p>
+            }
           </div>
         </div>
       </section>

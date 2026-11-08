@@ -12,8 +12,8 @@ export interface Servicio {
   puntos: { icono: string; titulo: string; texto: string }[];
   dirigidoA: string[];
   nota?: string;
-  /** Video vertical (reel) con su portada y una leyenda corta. */
-  video?: { src: string; portada: string; titulo: string; leyenda: string };
+  /** Video vertical (reel) con su portada, párrafos de descripción y un texto destacado. */
+  video?: { src: string; portada: string; titulo: string; parrafos: string[]; destacado?: string };
   mensajeWhatsApp: string;
 }
 
@@ -54,8 +54,17 @@ export const SERVICIOS: Servicio[] = [
       src: 'assets/videos/electrobisturi-didactico.mp4',
       portada: 'assets/imagenes/servicios/electrobisturi-didactico-portada.webp',
       titulo: 'Electrobisturí didáctico monopolar · en desarrollo',
-      leyenda: 'Cuatro modos de operación, osciloscopio integrado, puntos de prueba en cada placa y alarma REM, ' +
-        'pensado para aprender electrocirugía midiendo. Uso exclusivo de laboratorio y docencia.'
+      parrafos: [
+        'En Ingeniería Biomédica se estudia la electrocirugía, pero casi nunca hay un equipo para abrirlo, medirlo ' +
+          'y entender qué pasa en cada etapa.',
+        'Por eso estamos diseñando un electrobisturí monopolar didáctico: cuatro modos (PURE, BLEND, FULG y SPRAY), ' +
+          'una pantalla táctil para operarlo y otra para ver las señales, y puntos de prueba en cada placa para que ' +
+          'el estudiante mida lo que la teoría explica.',
+        'Antes de construirlo lo simulamos paso a paso: formas de onda, potencias, protecciones y monitoreo del ' +
+          'electrodo de retorno (REM). Hoy la interfaz ya funciona y el diseño electrónico avanza.'
+      ],
+      destacado: 'Equipo de uso exclusivo para laboratorio y docencia, no para pacientes. ¿Eres docente o coordinas ' +
+        'una carrera de Ingeniería Biomédica o Electrónica? Escríbenos y conversemos.'
     },
     mensajeWhatsApp: 'Hola JPC Electronics, quiero información sobre equipos médicos didácticos.'
   },
