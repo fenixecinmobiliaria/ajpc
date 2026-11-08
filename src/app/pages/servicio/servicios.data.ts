@@ -14,6 +14,8 @@ export interface Servicio {
   nota?: string;
   /** Video vertical (reel) con su portada, párrafos de descripción y un texto destacado. */
   videos?: VideoServicio[];
+  /** Trabajos realizados (sitios web, sistemas). */
+  portafolio?: TrabajoPortafolio[];
   mensajeWhatsApp: string;
 }
 
@@ -27,6 +29,15 @@ export interface VideoServicio {
   vertical?: boolean;
   /** Etiqueta sobre el video; por defecto «Demostración en video». */
   etiqueta?: string;
+}
+
+export interface TrabajoPortafolio {
+  nombre: string;
+  tipo: string;
+  descripcion: string;
+  imagen: string;
+  /** Enlace al sitio publicado; sin enlace se muestra como demo. */
+  url?: string;
 }
 
 export const WHATSAPP_JPC = '593980929669';
@@ -96,6 +107,24 @@ export const SERVICIOS: Servicio[] = [
       { icono: '🌐', titulo: 'Dominio y publicación', texto: 'Le guiamos para tener su propio dominio y mantener el sitio en línea.' }
     ],
     dirigidoA: ['Pequeñas y medianas empresas', 'Profesionales independientes', 'Emprendimientos'],
+    portafolio: [
+      { nombre: 'JPC Electronics', tipo: 'Sitio corporativo', imagen: 'assets/imagenes/portafolio/jpc.webp',
+        url: 'https://jpcelectronics-52996.web.app', descripcion: 'Este mismo sitio: catálogo, logros, prototipos y panel de administración.' },
+      { nombre: 'Inmobiliaria Fenix EC', tipo: 'Inmobiliaria', imagen: 'assets/imagenes/portafolio/fenix.webp',
+        url: 'https://finalinmobiliaria.web.app', descripcion: 'Catálogo de propiedades administrable, con contacto por WhatsApp.' },
+      { nombre: 'Fenix EC Suite', tipo: 'Sistema interno', imagen: 'assets/imagenes/portafolio/fenix-suite.webp',
+        url: 'https://fenix-ec-suite.web.app', descripcion: 'Captación de propiedades en campo y cola de aprobación para publicar.' },
+      { nombre: 'Inmobiliaria Happy Home', tipo: 'Inmobiliaria', imagen: 'assets/imagenes/portafolio/happy-home.webp',
+        url: 'https://inmobiliaria-happy-home.web.app', descripcion: 'Sitio con catálogo de propiedades y panel para el equipo.' },
+      { nombre: 'Realtor VIP Cuenca', tipo: 'Demo inmobiliaria', imagen: 'assets/imagenes/portafolio/realtor-vip.webp',
+        descripcion: 'Demostración de sitio inmobiliario con la identidad de la marca.' },
+      { nombre: 'Vive Feliz Real Estate', tipo: 'Demo inmobiliaria', imagen: 'assets/imagenes/portafolio/vive-feliz.webp',
+        descripcion: 'Demostración de sitio inmobiliario con la identidad de la marca.' },
+      { nombre: 'MasterBeauty', tipo: 'Escuela de belleza', imagen: 'assets/imagenes/portafolio/masterbeauty.webp',
+        url: 'https://master-beauty-jpc.web.app', descripcion: 'Sitio con cursos, portafolio y contacto directo por WhatsApp.' },
+      { nombre: 'Gabriel Garaban (@garabanto)', tipo: 'Portafolio de artista', imagen: 'assets/imagenes/portafolio/garabanto.webp',
+        descripcion: 'Portafolio de diseño gráfico e ilustración con galería filtrable y animaciones.' }
+    ],
     videos: [
       {
         src: 'assets/videos/software-mantenimiento.mp4',

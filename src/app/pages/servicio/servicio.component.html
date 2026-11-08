@@ -24,6 +24,32 @@
       }
     </section>
 
+    @if (s.portafolio?.length) {
+      <section class="max-w-6xl mx-auto px-4 mt-16">
+        <h2 class="text-center text-3xl font-black text-[#0A1630] tracking-tight">Páginas web que hemos desarrollado</h2>
+        <div class="w-16 h-1 bg-[#FFDD00] rounded mx-auto mt-3 mb-8" aria-hidden="true"></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          @for (t of s.portafolio; track t.nombre) {
+            <article class="bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col">
+              <div class="aspect-[16/10] bg-[#0A1630] relative">
+                <img [src]="t.imagen" [alt]="'Página web de ' + t.nombre" loading="lazy" class="absolute inset-0 w-full h-full object-cover object-top" />
+                <span class="absolute top-3 left-3 bg-[#0A1630]/85 text-[#FFDD00] text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full">{{ t.tipo }}</span>
+              </div>
+              <div class="p-5 flex flex-col flex-1">
+                <h3 class="font-black text-[#0A1630] leading-tight">{{ t.nombre }}</h3>
+                <p class="text-sm text-slate-600 mt-2 leading-relaxed flex-1">{{ t.descripcion }}</p>
+                @if (t.url) {
+                  <a [href]="t.url" target="_blank" rel="noopener" class="mt-4 self-start text-sm font-black text-[#0057D9] hover:underline">Visitar sitio →</a>
+                } @else {
+                  <span class="mt-4 self-start text-xs font-bold text-slate-400 uppercase tracking-widest">Demo</span>
+                }
+              </div>
+            </article>
+          }
+        </div>
+      </section>
+    }
+
     @for (v of s.videos ?? []; track v.src) {
       <section class="mx-auto px-4 mt-16" [ngClass]="v.vertical ? 'max-w-xl' : 'max-w-5xl'">
         <article class="bg-white rounded-3xl shadow-xl overflow-hidden">
