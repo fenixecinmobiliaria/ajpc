@@ -5,7 +5,7 @@
       <span class="inline-block text-[#FFDD00] text-xs font-black uppercase tracking-[0.25em] mb-4">JPC Electronics · Hecho en Cuenca</span>
       <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4">Nuestros logros</h1>
       <p class="text-lg text-[#F2F5FB]/90 font-medium max-w-2xl mx-auto leading-relaxed">
-        Una trayectoria que impulsa nuevos desarrollos: reconocimientos a la innovación, selección nacional y participación en incubación.
+        Una trayectoria que impulsa nuevos desarrollos: desde la formación y la ingeniería clínica hospitalaria hasta los reconocimientos a la innovación y la incubación.
       </p>
     </div>
   </section>
@@ -23,10 +23,15 @@
                      [class.object-cover]="l.ajuste !== 'contain'"
                      [class.object-contain]="l.ajuste === 'contain'" />
               </div>
+            } @else {
+              <div class="md:w-2/5 shrink-0 bg-gradient-to-br from-[#0A1630] to-[#0057D9] min-h-[160px] md:min-h-[220px] flex flex-col items-center justify-center gap-2 text-white" aria-hidden="true">
+                <span class="text-6xl">{{ l.icono || '🏆' }}</span>
+                <span class="text-sm font-black tracking-widest text-[#FFDD00]">{{ l.periodo || l.anio }}</span>
+              </div>
             }
             <div class="p-7 md:p-8 flex flex-col justify-center">
               <div class="flex flex-wrap items-center gap-2 mb-3">
-                <span class="bg-[#0057D9] text-white text-xs font-black px-3 py-1 rounded-full">{{ l.anio }}</span>
+                <span class="bg-[#0057D9] text-white text-xs font-black px-3 py-1 rounded-full">{{ l.periodo || l.anio }}</span>
                 <span class="text-[11px] font-black uppercase tracking-widest text-[#0057D9]">{{ l.tipo }}</span>
               </div>
               <div class="w-12 h-1 bg-[#FFDD00] rounded mb-3" aria-hidden="true"></div>

@@ -11,16 +11,23 @@
  * - Misión Emprende 593: "Top 100", nunca "finalista".
  * - Nada de "a la venta" ni precios: ningún equipo tiene registro ARCSA todavía.
  */
-export type TipoLogro = 'Reconocimiento' | 'Selección nacional' | 'Incubación' | 'Alianza' | 'Evento' | 'Medios';
+export type TipoLogro =
+  | 'Reconocimiento' | 'Selección nacional' | 'Incubación' | 'Alianza' | 'Evento' | 'Medios'
+  | 'Formación' | 'Trayectoria profesional';
 
 export interface Logro {
   id: string;
+  /** Año con el que se ordena (en un periodo, el año de inicio). */
   anio: number;
+  /** Texto a mostrar en lugar del año, p. ej. '2009 – 2013'. */
+  periodo?: string;
   tipo: TipoLogro;
   titulo: string;
   subtitulo: string;
   descripcion: string;
   imagen?: string;
+  /** Emoji que se muestra cuando el logro aún no tiene foto. */
+  icono?: string;
   /** Cómo se encuadra la foto en la tarjeta: 'cover' la recorta, 'contain' la muestra entera. */
   ajuste?: 'cover' | 'contain';
   enlace?: { texto: string; url: string };
@@ -62,6 +69,29 @@ export const LOGROS: Logro[] = [
       'Un hito en nuestra trayectoria de desarrollo de tecnología médica.',
     imagen: 'assets/imagenes/logros/ingeniatec-2016.webp',
     ajuste: 'cover'
+  },
+  {
+    id: 'iess-jose-carrasco-arteaga-2009-2013',
+    anio: 2009,
+    periodo: '2009 – 2013',
+    tipo: 'Trayectoria profesional',
+    titulo: 'Fundador de Ingeniería Clínica · IESS',
+    subtitulo: 'Hospital de Especialidades José Carrasco Arteaga · Cuenca',
+    descripcion:
+      'El Ing. Patricio Campozano fue el primer ingeniero biomédico contratado por el Hospital José Carrasco Arteaga ' +
+      'del IESS, hospital de tercer nivel de especialidades en Cuenca, y dejó fundado su Departamento de Ingeniería Clínica.',
+    icono: '🏥'
+  },
+  {
+    id: 'uda-primera-promocion-2003',
+    anio: 2003,
+    tipo: 'Formación',
+    titulo: 'Primera promoción de Ingeniería Electrónica',
+    subtitulo: 'Universidad del Azuay · 2003',
+    descripcion:
+      'Nuestro fundador forma parte de la primera promoción de Ingenieros Electrónicos graduados en la ' +
+      'Universidad del Azuay, en Cuenca.',
+    icono: '🎓'
   }
 ];
 
