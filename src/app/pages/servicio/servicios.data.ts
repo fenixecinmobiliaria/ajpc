@@ -117,7 +117,11 @@ export const SERVICIOS: Servicio[] = [
       { icono: '🖨️', titulo: 'Impresión 3D', imagen: 'assets/imagenes/servicios/impresion-3d-pieza.webp',
         texto: 'Imprimimos carcasas, marcos y soportes a medida, en pocas piezas o en pequeñas series.' },
       { icono: '✅', titulo: 'Pieza terminada', imagen: 'assets/imagenes/servicios/impresion-3d-terminado.webp',
-        texto: 'Integramos la pieza con la electrónica: por ejemplo, los paneles de control de las camas hospitalarias.' }
+        texto: 'Integramos la pieza con la electrónica: por ejemplo, los paneles de control de las camas hospitalarias.' },
+      { icono: '⠃', titulo: 'Regleta Braille', imagen: 'assets/imagenes/servicios/impresion-3d-regleta-braille.webp',
+        texto: 'Regleta de cinco casillas con tapa, diseñada para el Kit Braille de nuestra plataforma de kits interactivos.' },
+      { icono: '🔤', titulo: 'Fichas Braille', imagen: 'assets/imagenes/servicios/impresion-3d-fichas-braille.webp',
+        texto: 'Juego de fichas del alfabeto con puntos en relieve, para formar letras y palabras en la regleta.' }
     ],
     dirigidoA: ['Empresas y talleres', 'Emprendedores y prototipos', 'Universidades y estudiantes'],
     videos: [{
