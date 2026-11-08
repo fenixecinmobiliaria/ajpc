@@ -39,6 +39,20 @@ export interface Logro {
 
 export const LOGROS: Logro[] = [
   {
+    id: 'presentacion-plataforma-kalary-2026',
+    anio: 2026,
+    tipo: 'Evento',
+    titulo: 'Presentamos la Plataforma de Kits Interactivos',
+    subtitulo: 'Auditorio de la Universidad Católica de Cuenca · Kalary Open · 5 de noviembre de 2026',
+    descripcion:
+      'Presentamos en vivo la Plataforma JPC de Kits Interactivos (Braille, AutiSense y SignPlay) ante representantes ' +
+      'del Ministerio de Educación, Deporte y Cultura, de la UNAE, de institutos tecnológicos del Austro y del Azuay, ' +
+      'y miembros de Kalary Open.',
+    imagen: 'assets/imagenes/logros/presentacion-plataforma-kalary-2026.webp',
+    ajuste: 'cover',
+    icono: '🎤'
+  },
+  {
     id: 'kalary-open-2026',
     anio: 2026,
     tipo: 'Incubación',
