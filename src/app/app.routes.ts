@@ -11,6 +11,7 @@ import { AlianzasEstrategicasComponent } from './pages/alianzas-estrategicas/ali
 import { AuthGuard } from './auth.guard';
 import { ServicioComponent } from './pages/servicio/servicio.component';
 import { LogrosComponent } from './pages/logros/logros.component';
+import { PrototiposComponent } from './pages/prototipos/prototipos.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -25,5 +26,6 @@ export const routes: Routes = [
   { path: 'alianzas-estrategicas', component: AlianzasEstrategicasComponent },
   { path: 'servicios/:id', component: ServicioComponent },
   { path: 'logros', component: LogrosComponent },
+  { path: 'prototipos', component: PrototiposComponent },
   { path: '**', redirectTo: 'home' }
 ];

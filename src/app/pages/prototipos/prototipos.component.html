@@ -1,0 +1,62 @@
+<div class="min-h-screen bg-slate-50 font-sans pb-20">
+  <section class="relative bg-gradient-to-br from-[#0A1630] via-[#0b2a6b] to-[#0057D9] text-white overflow-hidden">
+    <div class="absolute top-0 left-0 right-0 flex h-1.5" aria-hidden="true"><div class="flex-1 bg-[#FFDD00]"></div><div class="flex-1 bg-[#0057D9]"></div><div class="flex-1 bg-[#D7141A]"></div></div>
+    <div class="max-w-5xl mx-auto px-6 pt-16 pb-28 text-center">
+      <span class="inline-block text-[#FFDD00] text-xs font-black uppercase tracking-[0.25em] mb-4">Tecnología propia · Hecho en Cuenca</span>
+      <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4">Nuestros prototipos</h1>
+      <p class="text-lg text-[#F2F5FB]/90 font-medium max-w-2xl mx-auto leading-relaxed">
+        Equipos médicos diseñados y construidos en nuestro laboratorio, con electrónica, software y control propios.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3 text-sm font-bold">
+        <span class="bg-white/15 border border-white/25 rounded-full px-4 py-2">{{ prototipos.length }} prototipos funcionales</span>
+        <span class="bg-white/15 border border-white/25 rounded-full px-4 py-2">{{ conIA }} con módulos de IA en desarrollo</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-6xl mx-auto px-4 -mt-16 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+    @for (p of prototipos; track p.id) {
+      <article [id]="p.id" class="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col">
+        <div class="aspect-[4/3] bg-[#0A1630] relative">
+          <img [src]="p.imagen" [alt]="p.nombre" loading="lazy" class="absolute inset-0 w-full h-full"
+               [class.object-cover]="p.ajuste !== 'contain'" [class.object-contain]="p.ajuste === 'contain'" />
+          <span class="absolute top-4 left-4 bg-[#0A1630]/85 text-[#FFDD00] text-[11px] font-black uppercase tracking-widest px-3 py-1 rounded-full">{{ p.categoria }}</span>
+          <span class="absolute top-4 right-4 bg-white/90 text-[#0057D9] text-[11px] font-black uppercase tracking-widest px-3 py-1 rounded-full">Prototipo funcional</span>
+        </div>
+        <div class="p-7 flex flex-col flex-1">
+          <div class="w-12 h-1 bg-[#FFDD00] rounded mb-3" aria-hidden="true"></div>
+          <h2 class="text-2xl font-black text-[#0A1630] tracking-tight">{{ p.nombre }}</h2>
+          <p class="text-slate-600 mt-2 leading-relaxed">{{ p.resumen }}</p>
+          <h3 class="mt-5 text-[11px] font-black uppercase tracking-widest text-[#0057D9]">Innovaciones</h3>
+          <ul class="mt-2 space-y-2">
+            @for (i of p.innovaciones; track i) {
+              <li class="flex gap-2 text-sm text-slate-700 leading-relaxed">
+                <span class="text-[#0057D9] font-black" aria-hidden="true">✓</span><span>{{ i }}</span>
+              </li>
+            }
+          </ul>
+          @if (p.enDesarrollo; as d) {
+            <div class="mt-5 rounded-2xl p-4 border"
+                 [ngClass]="d.ia ? 'bg-[#0A1630] text-white border-[#0057D9]' : 'bg-[#FFF9D6] border-[#FFDD00]'">
+              <p class="text-[11px] font-black uppercase tracking-widest"
+                 [ngClass]="d.ia ? 'text-[#FFDD00]' : 'text-[#0A1630]'">{{ d.ia ? '🤖 ' : '🔬 ' }}{{ d.titulo }}</p>
+              <p class="text-sm mt-1 leading-relaxed" [ngClass]="d.ia ? 'text-[#F2F5FB]' : 'text-slate-700'">{{ d.texto }}</p>
+            </div>
+          }
+        </div>
+      </article>
+    }
+  </section>
+
+  <section class="max-w-3xl mx-auto px-4 mt-16 text-center">
+    <p class="text-sm text-slate-500 leading-relaxed">
+      Son prototipos funcionales desarrollados en Cuenca. Antes de su comercialización deberán obtener el registro sanitario
+      correspondiente; los módulos de inteligencia artificial están en desarrollo y todavía no tienen validación clínica.
+    </p>
+    <a [href]="enlaceWhatsApp" target="_blank" rel="noopener"
+       class="mt-8 inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#1ebe5b] text-white font-black uppercase tracking-wide px-8 py-4 rounded-full shadow-lg transition-colors">
+      Conversemos sobre una colaboración o un piloto
+    </a>
+    <p class="mt-6"><a routerLink="/logros" class="text-[#0057D9] font-bold underline">Ver nuestros logros</a></p>
+  </section>
+</div>

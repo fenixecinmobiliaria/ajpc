@@ -13,7 +13,7 @@
  */
 export type TipoLogro =
   | 'Reconocimiento' | 'Selección nacional' | 'Incubación' | 'Alianza' | 'Evento' | 'Medios'
-  | 'Formación' | 'Trayectoria profesional' | 'Formación de talento';
+  | 'Formación' | 'Trayectoria profesional' | 'Formación de talento' | 'Desarrollo tecnológico';
 
 export interface Logro {
   id: string;
@@ -51,6 +51,22 @@ export const LOGROS: Logro[] = [
     imagen: 'assets/imagenes/logros/presentacion-plataforma-kalary-2026.webp',
     ajuste: 'cover',
     icono: '🎤'
+  },
+  {
+    id: 'prototipos-tecnologia-propia',
+    anio: 2026,
+    tipo: 'Desarrollo tecnológico',
+    titulo: '8 prototipos con tecnología propia',
+    subtitulo: 'Laboratorio JPC Electronics · Cuenca',
+    descripcion:
+      'Contamos con prototipos funcionales diseñados en nuestro laboratorio: la Servocuna neonatal inteligente, ' +
+      'la lámpara de fototerapia AVATAR, la cama de cuidados intensivos MEDIBED 5F, el equipo de tracción NEXUS, ' +
+      'el esterilizador en seco ES01, el sillón multipropósito con aplicación y comandos de voz, el lavamanos quirúrgico ' +
+      'y la automatización de ambulancias. Estamos desarrollando módulos de inteligencia artificial para la Servocuna y AVATAR.',
+    imagen: 'assets/imagenes/logros/servocuna-laboratorio.webp',
+    ajuste: 'cover',
+    icono: '🔬',
+    enlace: { texto: 'Ver todos los prototipos', url: '/prototipos' }
   },
   {
     id: 'kalary-open-2026',

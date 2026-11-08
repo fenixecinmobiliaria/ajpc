@@ -48,7 +48,11 @@
                 <p class="text-xs text-slate-400 italic mt-3">{{ l.credito }}</p>
               }
               @if (l.enlace) {
-                <a [href]="l.enlace.url" target="_blank" rel="noopener" class="mt-4 text-[#0057D9] font-bold underline">{{ l.enlace.texto }}</a>
+                @if (l.enlace.url.startsWith('/')) {
+                  <a [routerLink]="l.enlace.url" class="mt-4 self-start inline-flex items-center gap-2 bg-[#0057D9] hover:bg-[#0047b3] text-white text-sm font-black uppercase tracking-wide px-5 py-2 rounded-full shadow transition-colors">{{ l.enlace.texto }} <span aria-hidden="true">→</span></a>
+                } @else {
+                  <a [href]="l.enlace.url" target="_blank" rel="noopener" class="mt-4 text-[#0057D9] font-bold underline">{{ l.enlace.texto }}</a>
+                }
               }
             </div>
           </article>
