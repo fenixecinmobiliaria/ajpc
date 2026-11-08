@@ -4,6 +4,22 @@
   <meta charset="utf-8">
   <title>JPC Electronics | Ingeniería Biomédica en Cuenca</title>
   <base href="/">
+  <script>
+    // Enlaces del sitio anterior (sin "#"), p. ej. /catalogo o /mantenimientolist:
+    // se convierten a la ruta actual (/#/catalogo) para que abran su sección.
+    (function () {
+      var ruta = location.pathname.replace(/^\/+|\/+$/g, '');
+      if (!ruta || ruta === 'index.html' || location.hash) return;
+      var equivalentes = {
+        mantenimientolist: 'mantenimiento', repotenciacionlist: 'repotenciacion',
+        fabricacionlist: 'fabricacion', disenolist: 'diseno-inventor',
+        productos: 'catalogo', contacto: 'home', acerca: 'home'
+      };
+      var primera = ruta.split('/')[0];
+      if (equivalentes[primera]) ruta = equivalentes[primera];
+      location.replace('/#/' + ruta + location.search);
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Especialistas en Cuenca en la repotenciación, mantenimiento y fabricación de tecnología médica de alto rendimiento.">
   <meta name="keywords" content="Ingeniería Biomédica, Cuenca, JPC Electronics, Mantenimiento Médico, Repotenciación, Ambulancias Ecuador">
