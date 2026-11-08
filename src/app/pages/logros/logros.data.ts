@@ -56,12 +56,13 @@ export const LOGROS: Logro[] = [
     id: 'prototipos-tecnologia-propia',
     anio: 2026,
     tipo: 'Desarrollo tecnológico',
-    titulo: '8 prototipos con tecnología propia',
+    titulo: '9 prototipos con tecnología propia',
     subtitulo: 'Laboratorio JPC Electronics · Cuenca',
     descripcion:
       'Contamos con prototipos funcionales diseñados en nuestro laboratorio: la Servocuna neonatal inteligente, ' +
       'la lámpara de fototerapia AVATAR, la cama de cuidados intensivos MEDIBED 5F, el equipo de tracción NEXUS, ' +
-      'el esterilizador en seco ES01, el sillón multipropósito con aplicación y comandos de voz, el lavamanos quirúrgico ' +
+      'el esterilizador en seco ES01, el sillón multipropósito con aplicación y comandos de voz, el sillón ginecológico eléctrico, ' +
+      'el lavamanos quirúrgico ' +
       'y la automatización de ambulancias. Estamos desarrollando módulos de inteligencia artificial para la Servocuna y AVATAR.',
     imagen: 'assets/imagenes/logros/servocuna-laboratorio.webp',
     ajuste: 'cover',

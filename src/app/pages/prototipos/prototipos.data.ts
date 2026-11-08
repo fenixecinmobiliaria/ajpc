@@ -117,6 +117,18 @@ export const PROTOTIPOS: Prototipo[] = [
     ]
   },
   {
+    id: 'sillon-ginecologico',
+    nombre: 'Sillón ginecológico eléctrico',
+    categoria: 'Consulta y procedimientos',
+    imagen: 'assets/imagenes/prototipos/sillon-ginecologico.webp',
+    resumen: 'Sillón ginecológico motorizado para consulta y procedimientos, con control electrónico propio.',
+    innovaciones: [
+      'Respaldo, asiento y altura motorizados',
+      'Control con pedal para dejar las manos libres del profesional',
+      'Tarjetas de control diseñadas por JPC'
+    ]
+  },
+  {
     id: 'lavamanos',
     nombre: 'Lavamanos quirúrgico',
     categoria: 'Quirófano',
