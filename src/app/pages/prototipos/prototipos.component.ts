@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { PROTOTIPOS } from './prototipos.data';
 import { WHATSAPP_JPC } from '../servicio/servicios.data';
 
@@ -10,7 +10,18 @@ import { WHATSAPP_JPC } from '../servicio/servicios.data';
   imports: [CommonModule, RouterModule],
   templateUrl: './prototipos.component.html'
 })
-export class PrototiposComponent {
+export class PrototiposComponent implements OnDestroy {
+  /** Baja hasta la tarjeta indicada en la dirección (#/logros#id o #/prototipos#id), también si ya estaba en la página. */
+  private readonly route = inject(ActivatedRoute);
+  private readonly sub = this.route.fragment.subscribe(f => {
+    if (!f) return;
+    setTimeout(() => document.getElementById(f)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
+  });
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
   readonly prototipos = PROTOTIPOS;
   readonly conIA = PROTOTIPOS.filter(p => p.enDesarrollo?.ia).length;
   readonly enlaceWhatsApp =

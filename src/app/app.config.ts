@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, withHashLocation } from '@angular/router';
+import { provideRouter, withHashLocation, withInMemoryScrolling } from '@angular/router';
 
 import { routes } from './app.routes';
 import { initializeApp, provideFirebaseApp, getApp } from '@angular/fire/app';
@@ -10,7 +10,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes, withHashLocation()),
+    provideRouter(routes, withHashLocation(), withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' })),
     provideFirebaseApp(() => initializeApp({
       apiKey: "AIzaSyAPlsPY3277qlr7mq4hn0W_Gd6ijxM5NfU",
       authDomain: "jpcelectronics-52996.firebaseapp.com",

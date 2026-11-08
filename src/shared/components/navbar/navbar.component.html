@@ -11,47 +11,41 @@
       </div>
     </a>
 
-    <div class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-4">
-      <a routerLink="home"
-         routerLinkActive="!bg-blue-600 !text-white shadow-md"
-         [routerLinkActiveOptions]="{exact: true}"
-         (click)="closeMenu()"
-         class="text-[11px] font-black text-slate-500 hover:text-primary transition-all uppercase tracking-widest leading-none py-3 px-6 rounded-xl">Inicio</a>
-
-      <a routerLink="catalogo"
-         routerLinkActive="!bg-blue-600 !text-white shadow-md"
-         (click)="closeMenu()"
-         class="text-[11px] font-black text-slate-500 hover:text-primary transition-all uppercase tracking-widest leading-none py-3 px-6 rounded-xl">Catálogo</a>
-      <a routerLink="logros"
-         routerLinkActive="!bg-blue-600 !text-white shadow-md"
-         (click)="closeMenu()"
-         class="text-[11px] font-black text-slate-500 hover:text-primary transition-all uppercase tracking-widest leading-none py-3 px-6 rounded-xl">Logros</a>
-      <a routerLink="prototipos"
-         routerLinkActive="!bg-blue-600 !text-white shadow-md"
-         (click)="closeMenu()"
-         class="text-[11px] font-black text-slate-500 hover:text-primary transition-all uppercase tracking-widest leading-none py-3 px-6 rounded-xl">Prototipos</a>
-
-      <div class="dropdown"
-           [class.dropdown-open]="isDropdownOpen"
-           (mouseenter)="isDropdownOpen = true"
-           (mouseleave)="isDropdownOpen = false">
-        <div tabindex="0" role="button"
-             class="text-[11px] font-black text-slate-500 hover:text-primary transition-all uppercase tracking-widest flex items-center gap-1 leading-none py-3 px-6 rounded-xl">
-          Especialidades
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-        </div>
-        <ul tabindex="0" class="dropdown-content z-[1] menu p-3 shadow-2xl bg-white rounded-2xl w-64 border border-slate-50">
-          <li><a routerLink="mantenimiento" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()" class="font-bold text-slate-600 py-3 mb-1">🛠 Mantenimiento</a></li>
-          <li><a routerLink="repotenciacion" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()" class="font-bold text-slate-600 py-3 mb-1">🚀 Repotenciación</a></li>
-          <li><a routerLink="diseno-inventor" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()" class="font-bold text-slate-600 py-3 mb-1">⚙️ Diseño Inventor</a></li>
-          <li><a routerLink="fabricacion" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()" class="font-bold text-slate-600 py-3 mb-1">🏭 Fabricación</a></li>
-          <li><a routerLink="alianzas-estrategicas" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()" class="font-bold text-slate-600 py-3 mb-1">🤝 Alianzas Estratégicas</a></li>
-          <li><a routerLink="domotica" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()" class="font-bold text-slate-600 py-3 mb-1">🏠 Domótica</a></li>
-          @for (sv of servicios; track sv.id) {
-            <li><a [routerLink]="['/servicios', sv.id]" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()" class="font-bold text-slate-600 py-3 mb-1">{{ sv.titulo }}</a></li>
+    <div class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-2 lg:gap-4">
+      @for (m of menus; track m.id) {
+        <div class="relative" (mouseenter)="abierto = m.id" (mouseleave)="abierto = null">
+          @if (m.ruta) {
+            <a [routerLink]="m.ruta"
+               routerLinkActive="!bg-blue-600 !text-white shadow-md"
+               [routerLinkActiveOptions]="{ exact: !!m.exacta }"
+               (click)="closeMenu()" (focus)="abierto = m.id"
+               [attr.aria-expanded]="abierto === m.id" aria-haspopup="true"
+               class="text-[11px] font-black text-slate-500 hover:text-primary transition-all uppercase tracking-widest leading-none py-3 px-4 lg:px-6 rounded-xl flex items-center gap-1">
+              {{ m.texto }}
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+            </a>
+          } @else {
+            <button type="button" (click)="abierto = m.id" (focus)="abierto = m.id"
+                    [attr.aria-expanded]="abierto === m.id" aria-haspopup="true"
+                    class="text-[11px] font-black text-slate-500 hover:text-primary transition-all uppercase tracking-widest leading-none py-3 px-4 lg:px-6 rounded-xl flex items-center gap-1">
+              {{ m.texto }}
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+            </button>
           }
-        </ul>
-      </div>
+          @if (abierto === m.id) {
+            <div class="absolute left-0 top-full pt-2 z-50">
+              <ul class="p-3 shadow-2xl bg-white rounded-2xl border border-slate-100 max-h-[75vh] overflow-y-auto" [ngClass]="m.ancho">
+                @for (o of m.opciones; track $index) {
+                  <li>
+                    <a [routerLink]="o.ruta" [queryParams]="o.queryParams" [fragment]="o.fragment" (click)="closeMenu()"
+                       class="block font-bold text-sm text-slate-600 hover:bg-blue-50 hover:text-[#0057D9] rounded-xl px-3 py-2.5 leading-snug">{{ o.texto }}</a>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+        </div>
+      }
     </div>
 
     <div class="flex items-center justify-end w-auto md:w-1/3">
@@ -65,27 +59,19 @@
         <button tabindex="0" class="btn btn-ghost btn-circle text-slate-900" aria-label="Menú principal">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
         </button>
-        <ul tabindex="0" class="dropdown-content z-[1] menu p-4 shadow-2xl bg-white rounded-3xl w-64 border border-slate-100 mt-4">
-          <li><a routerLink="home" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()" class="font-bold text-slate-600 py-3 mb-1">Inicio</a></li>
-          <li><a routerLink="catalogo" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()" class="font-bold text-slate-600 py-3 mb-1">Catálogo</a></li>
-          <li><a routerLink="logros" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()" class="font-bold text-slate-600 py-3 mb-1">Logros</a></li>
-          <li><a routerLink="prototipos" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()" class="font-bold text-slate-600 py-3 mb-1">Prototipos</a></li>
-          <li>
-            <details>
-              <summary class="font-bold text-slate-600 py-3">Especialidades</summary>
-              <ul class="p-2 gap-1 bg-slate-50 rounded-2xl mt-2">
-                <li><a routerLink="mantenimiento" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()">Mantenimiento</a></li>
-                <li><a routerLink="repotenciacion" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()">Repotenciación</a></li>
-                <li><a routerLink="diseno-inventor" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()">Diseño Inventor</a></li>
-                <li><a routerLink="fabricacion" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()">Fabricación</a></li>
-                <li><a routerLink="alianzas-estrategicas" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()">Alianzas Estratégicas</a></li>
-                <li><a routerLink="domotica" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()">Domótica</a></li>
-                @for (sv of servicios; track sv.id) {
-                  <li><a [routerLink]="['/servicios', sv.id]" routerLinkActive="!bg-blue-600 !text-white" (click)="closeMenu()">{{ sv.titulo }}</a></li>
-                }
-              </ul>
-            </details>
-          </li>
+        <ul tabindex="0" class="dropdown-content z-[1] menu p-4 shadow-2xl bg-white rounded-3xl w-72 border border-slate-100 mt-4 max-h-[80vh] overflow-y-auto flex-nowrap">
+          @for (m of menus; track m.id) {
+            <li>
+              <details>
+                <summary class="font-bold text-slate-600 py-3">{{ m.texto }}</summary>
+                <ul class="p-2 gap-1 bg-slate-50 rounded-2xl mt-2">
+                  @for (o of m.opciones; track $index) {
+                    <li><a [routerLink]="o.ruta" [queryParams]="o.queryParams" [fragment]="o.fragment" (click)="closeMenu()" class="leading-snug">{{ o.texto }}</a></li>
+                  }
+                </ul>
+              </details>
+            </li>
+          }
         </ul>
       </div>
     </div>
